@@ -1,6 +1,7 @@
 import * as React from "react";
-import jbee_header_image_bg from "../assets/images/jbee_header_image_bg.jpg";
-import logo from "../assets/images/logo_jbee_dev_800_blanc.png";
+import jbee_header_image_bg from "../images/jbee_header_image_bg.jpg";
+import logo from "../images/logo_jbee_dev_800_blanc.png";
+import "../styles/global.css";
 
 const pageStyles = {
   color: "white",
@@ -18,7 +19,7 @@ const pageStyles = {
 
 const logoWrapperStyles = {
   display: "flex",
-  flexDirection: "column",
+  flexFlow: "column wrap",
   alignItems: "center",
   justifyContent: "center",
 };
@@ -31,8 +32,7 @@ export default function MaintenancePage() {
     <div style={pageStyles}>
       <div style={logoWrapperStyles}>
         <img style={logoStyles} src={logo} alt="logo"></img>
-        <h1>Pour l'instant, ce site ne marche qu'en local... ¯|_(ツ)_/¯</h1>
-        <h1>A bientôt...</h1>
+        <p>Petite pause café... on revient bientôt ! </p>
       </div>
     </div>
   );
