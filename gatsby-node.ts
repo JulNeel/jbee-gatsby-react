@@ -7,7 +7,7 @@ export const createPages: GatsbyNode["createPages"] = async ({ graphql, actions 
 
   const result = await graphql<Queries.AllPostsQuery>(`
     query AllPosts {
-      allWpPost(sort: {date: DESC}) {
+      allWpPost(sort: {date: ASC}) {
         edges {
           node {
             id
