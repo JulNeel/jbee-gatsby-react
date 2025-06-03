@@ -4,6 +4,10 @@ import { GatsbyImage } from "gatsby-plugin-image";
 import parse from "html-react-parser";
 import Layout from "../components/layout";
 
+// We're using Gutenberg so we need the block styles
+import "@wordpress/block-library/build-style/style.css";
+import "@wordpress/block-library/build-style/theme.css";
+
 const PostTemplate: React.FC<PageProps<Queries.PostByIdQuery>> = ({
   data: { previousPost, nextPost, currentPost },
 }) => {
