@@ -1,30 +1,34 @@
 import React from "react";
-import { Link, PageProps, graphql } from "gatsby";
-import { GatsbyImage } from "gatsby-plugin-image";
+import { Link, PageProps, HeadProps, graphql } from "gatsby";
+import { GatsbyImage, getImage, ImageDataLike } from "gatsby-plugin-image";
 import parse from "html-react-parser";
 import Layout from "../components/layout";
+import { SEO } from "../components/SEO";
 
-// We're using Gutenberg so we need the block styles
+// Gutenberg block styles
 import "@wordpress/block-library/build-style/style.css";
 import "@wordpress/block-library/build-style/theme.css";
+import { useSiteMetadata } from "../hooks/useSiteMetadata";
 
 const PostTemplate: React.FC<PageProps<Queries.PostByIdQuery>> = ({
   data: { previousPost, nextPost, currentPost },
 }) => {
-  const featuredImage = {
-    image: currentPost?.featuredImage?.node?.localFile?.childImageSharp?.gatsbyImageData,
-    alt: currentPost?.featuredImage?.node?.altText || ``,
-  };
+  const imageData = currentPost?.featuredImage?.node?.localFile
+    ? getImage(currentPost.featuredImage.node.localFile as ImageDataLike)
+    : undefined;
 
   return (
     <Layout isHomePage={false}>
       <article className="blog-post" itemScope itemType="http://schema.org/Article">
         <header>
           <h1 itemProp="headline">{parse(currentPost?.title ?? "")}</h1>
-
           <p>{currentPost?.date}</p>
-
-          {featuredImage?.image && <GatsbyImage alt={featuredImage.alt} image={featuredImage.image} />}
+          {imageData && (
+            <GatsbyImage
+              image={imageData}
+              alt={currentPost?.featuredImage?.node?.altText || currentPost?.title || ""}
+            />
+          )}
         </header>
 
         {!!currentPost?.content && <section itemProp="articleBody">{parse(currentPost.content)}</section>}
@@ -35,10 +39,10 @@ const PostTemplate: React.FC<PageProps<Queries.PostByIdQuery>> = ({
       <nav className="blog-post-nav">
         <ul
           style={{
-            display: `flex`,
-            flexWrap: `wrap`,
-            justifyContent: `space-between`,
-            listStyle: `none`,
+            display: "flex",
+            flexWrap: "wrap",
+            justifyContent: "space-between",
+            listStyle: "none",
             padding: 0,
           }}
         >
@@ -49,7 +53,6 @@ const PostTemplate: React.FC<PageProps<Queries.PostByIdQuery>> = ({
               </Link>
             )}
           </li>
-
           <li>
             {nextPost && (
               <Link to={nextPost.uri ?? ""} rel="next">
@@ -65,29 +68,97 @@ const PostTemplate: React.FC<PageProps<Queries.PostByIdQuery>> = ({
 
 export default PostTemplate;
 
+// SEO <Head> export
+export const Head: React.FC<HeadProps<Queries.PostByIdQuery>> = ({ data }) => {
+  const { currentPost, site } = data;
+
+  if (!currentPost || !currentPost.seo) return null;
+
+  const image = currentPost.featuredImage?.node?.sourceUrl;
+  const url = `${site?.siteMetadata?.siteUrl}${currentPost.uri}`;
+  const {
+    title: defaultTitle,
+    description: defaultDescription,
+    author: defaultAuthor,
+    siteUrl: defaultSiteUrl,
+  } = useSiteMetadata();
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: currentPost.seo.title,
+    description: currentPost.seo.metaDesc,
+    author: {
+      "@type": "Person",
+      name: currentPost.author?.node?.name,
+    },
+    datePublished: currentPost.date,
+    mainEntityOfPage: url,
+    image,
+  };
+
+  return (
+    <SEO
+      title={currentPost.seo.title ?? currentPost.title ?? defaultTitle}
+      description={currentPost.seo.metaDesc ? currentPost.seo.metaDesc : currentPost.excerpt ?? undefined}
+      author={currentPost.author?.node.name ?? defaultAuthor}
+      image={image ?? ""}
+      url={url}
+      type="article"
+      canonical={url}
+      jsonLd={jsonLd}
+      noindex={currentPost.seo.metaRobotsNoindex === "noindex"}
+      nofollow={currentPost.seo.metaRobotsNofollow === "nofollow"}
+    />
+  );
+};
+
+// GraphQL query
 export const postQuery = graphql`
   query PostById($id: String!, $previousPostId: String, $nextPostId: String) {
     currentPost: wpPost(id: { eq: $id }) {
-      id
-      excerpt
-      content
       title
-      date(formatString: "MMMM DD, YYYY")
+      content
+      excerpt
+      date
+      uri
       featuredImage {
         node {
           altText
+          sourceUrl
           localFile {
+            publicURL
             childImageSharp {
-              gatsbyImageData(width: 1000, quality: 90)
+              gatsbyImageData(width: 1200, formats: [AUTO, WEBP])
             }
           }
         }
       }
+      author {
+        node {
+          name
+        }
+      }
+      seo {
+        title
+        metaDesc
+        opengraphTitle
+        opengraphDescription
+        metaRobotsNoindex
+        metaRobotsNofollow
+      }
     }
+    site {
+      siteMetadata {
+        siteUrl
+      }
+    }
+
     previousPost: wpPost(id: { eq: $previousPostId }) {
       uri
       title
     }
+
     nextPost: wpPost(id: { eq: $nextPostId }) {
       uri
       title
