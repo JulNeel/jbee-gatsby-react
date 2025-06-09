@@ -1,50 +1,45 @@
+import { graphql, useStaticQuery } from "gatsby";
+import { getImage, IGatsbyImageData, ImageDataLike } from "gatsby-plugin-image";
 import React, { ReactNode } from "react";
-import { Link, useStaticQuery, graphql } from "gatsby";
-import parse from "html-react-parser";
+import Header from "./header";
 
 interface LayoutProps {
   isHomePage: boolean;
   children: ReactNode;
 }
 
-interface GeneralSettings {
-  title: string;
-  description: string;
-}
-
-interface LayoutQueryData {
-  wp: {
-    generalSettings: GeneralSettings;
-  };
-}
-
 const Layout: React.FC<LayoutProps> = ({ isHomePage, children }) => {
-  const data: LayoutQueryData = useStaticQuery(graphql`
-    query LayoutQuery {
+  const data: Queries.LayoutQuery = useStaticQuery(graphql`
+    query Layout {
       wp {
         generalSettings {
           title
           description
         }
+        siteLogo {
+          altText
+          fileSize
+          srcSet
+          sourceUrl
+          localFile {
+            childImageSharp {
+              gatsbyImageData(width: 220, layout: FIXED, placeholder: BLURRED)
+            }
+          }
+        }
       }
     }
   `);
 
-  const { title } = data.wp.generalSettings;
+  const siteTitle = data.wp?.generalSettings?.title ?? "Titre du site";
+  const siteLogoData = data.wp?.siteLogo?.localFile?.childImageSharp
+    ? getImage(data.wp.siteLogo.localFile as ImageDataLike)
+    : null;
+  const siteLogoAltText = data.wp?.siteLogo?.altText || "Site logo";
 
   return (
     <div className="global-wrapper" data-is-root-path={isHomePage}>
-      <header className="global-header">
-        {isHomePage ? (
-          <h1 className="main-heading">
-            <Link to="/">{parse(title)}</Link>
-          </h1>
-        ) : (
-          <Link className="header-link-home" to="/">
-            {title}
-          </Link>
-        )}
-      </header>
+      <Header siteTitle={siteTitle} siteLogoData={siteLogoData} siteLogoAltText={siteLogoAltText}></Header>
 
       <main>{children}</main>
 
