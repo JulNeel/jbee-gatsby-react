@@ -1,7 +1,11 @@
 import { graphql, useStaticQuery } from "gatsby";
-import { getImage, IGatsbyImageData, ImageDataLike } from "gatsby-plugin-image";
+import { getImage, ImageDataLike } from "gatsby-plugin-image";
 import React, { ReactNode } from "react";
-import Header from "./header";
+import "../styles/fonts/text.css";
+import "../styles/reset.css";
+import { lightTheme } from "../styles/themes/lightTheme.css";
+import Header from "./Header";
+import { contentStyle } from "./layout.css";
 
 interface LayoutProps {
   isHomePage: boolean;
@@ -23,25 +27,35 @@ const Layout: React.FC<LayoutProps> = ({ isHomePage, children }) => {
           sourceUrl
           localFile {
             childImageSharp {
-              gatsbyImageData(width: 220, layout: FIXED, placeholder: BLURRED)
+              gatsbyImageData(placeholder: NONE)
+            }
+          }
+        }
+        siteFavicon {
+          altText
+          fileSize
+          srcSet
+          sourceUrl
+          localFile {
+            childImageSharp {
+              gatsbyImageData(placeholder: NONE)
             }
           }
         }
       }
     }
   `);
-
-  const siteTitle = data.wp?.generalSettings?.title ?? "Titre du site";
   const siteLogoData = data.wp?.siteLogo?.localFile?.childImageSharp
     ? getImage(data.wp.siteLogo.localFile as ImageDataLike)
     : null;
+
   const siteLogoAltText = data.wp?.siteLogo?.altText || "Site logo";
 
   return (
-    <div className="global-wrapper" data-is-root-path={isHomePage}>
-      <Header siteTitle={siteTitle} siteLogoData={siteLogoData} siteLogoAltText={siteLogoAltText}></Header>
+    <div className={`global-wrapper ${lightTheme}`} data-is-root-path={isHomePage}>
+      <Header siteLogoData={siteLogoData} siteLogoAltText={siteLogoAltText}></Header>
 
-      <main>{children}</main>
+      <main className={contentStyle}>{children}</main>
 
       <footer>
         © {new Date().getFullYear()}, Built with <a href="https://www.gatsbyjs.com">Gatsby</a> and{" "}

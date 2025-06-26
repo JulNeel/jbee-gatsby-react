@@ -2,7 +2,7 @@ import React from "react";
 import { Link, PageProps, HeadProps, graphql } from "gatsby";
 import { GatsbyImage, getImage, ImageDataLike } from "gatsby-plugin-image";
 import parse from "html-react-parser";
-import Layout from "../components/layout";
+import Layout from "../components/Layout";
 import { SEO } from "../components/SEO";
 
 // Gutenberg block styles
@@ -68,7 +68,6 @@ const PostTemplate: React.FC<PageProps<Queries.PostByIdQuery>> = ({
 
 export default PostTemplate;
 
-// SEO <Head> export
 export const Head: React.FC<HeadProps<Queries.PostByIdQuery>> = ({ data }) => {
   const { currentPost, site } = data;
 
