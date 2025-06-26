@@ -1,7 +1,6 @@
 import * as React from "react";
 import jbee_header_image_bg from "../images/jbee_header_image_bg.jpg";
 import logo from "../images/logo_jbee_dev_800_blanc.png";
-import "../styles/global.css";
 
 const pageStyles = {
   color: "white",
