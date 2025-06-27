@@ -1,10 +1,10 @@
 import clsx from "clsx";
 import { GatsbyImage, IGatsbyImageData } from "gatsby-plugin-image";
 import React, { useRef } from "react";
-import { Box } from "./box";
+import { Box } from "./Box";
 import { headerContentStyle, headerStyle, logoStyle, scrolledHeaderStyle, scrolledLogoStyle } from "./Header.css";
 import HeaderMenu from "./HeaderMenu";
-import { contentStyle } from "./layout.css";
+import { contentStyle } from "./Layout.css";
 import { useIsScrolled } from "../hooks/useIsScrolled";
 interface HeaderProps {
   siteLogoData: IGatsbyImageData | null | undefined;

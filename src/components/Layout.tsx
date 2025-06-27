@@ -5,7 +5,7 @@ import "../styles/fonts/text.css";
 import "../styles/reset.css";
 import { lightTheme } from "../styles/themes/lightTheme.css";
 import Header from "./Header";
-import { contentStyle } from "./layout.css";
+import { contentStyle } from "./Layout.css";
 
 interface LayoutProps {
   isHomePage: boolean;
