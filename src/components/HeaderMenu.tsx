@@ -1,6 +1,6 @@
 import { graphql, useStaticQuery } from "gatsby";
 import React, { Fragment, useEffect, useState } from "react";
-import { Box } from "./box";
+import { Box } from "./Box";
 import {
   hamburgerButton,
   hamburgerLine,
