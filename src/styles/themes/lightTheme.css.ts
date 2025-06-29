@@ -7,7 +7,7 @@ export const lightTheme = createTheme(themeVars, {
   textColors: {
     default: '#375969',
     secondary: 'gray',
-    white: 'white',
+    white: globalVars.colors.white,
     brand: '#744ed4',
     good: 'green',
     bad: 'red',
@@ -16,9 +16,15 @@ export const lightTheme = createTheme(themeVars, {
   buttonColors: {
     primary: {
       background: globalVars.colors.primaryDark,
-      text: 'white',
+      text: globalVars.colors.white,
       hoverBackground: globalVars.colors.primary,
-      hoverText: 'white'
+      hoverText: globalVars.colors.white
+    },
+    secondary: {
+      background: globalVars.colors.white,
+      text: globalVars.colors.primaryDark,
+      hoverBackground: globalVars.colors.primary,
+      hoverText: globalVars.colors.white
     },
   },
   spaces: {

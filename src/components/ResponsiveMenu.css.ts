@@ -1,8 +1,21 @@
-import { CSSProperties, style } from "@vanilla-extract/css";
+import { CSSProperties, style, createTheme } from "@vanilla-extract/css";
 import { breakpoints } from "../styles/breakpoints";
 import { globalVars } from "../styles/themes/globalTheme.css";
 import { themeVars } from "../styles/themes/themeContract.css";
 
+export const [primaryMenu, localThemeVars] = createTheme({
+  background: themeVars.backgroundColor,
+  text: globalVars.colors.primaryDark,
+  hoverBackground: globalVars.colors.primary,
+  hoverText: themeVars.textColors.white,
+})
+export const secondaryMenu = createTheme(localThemeVars, {
+  background: 'none',
+  text: themeVars.textColors.white,
+  hoverBackground: themeVars.textColors.white,
+  hoverText: themeVars.textColors.default,
+
+})
 
 export const navMenu = style({
   width: "100%",
@@ -10,15 +23,14 @@ export const navMenu = style({
   position: "fixed",
   top: 0,
   left: 0,
-  backgroundColor: themeVars.backgroundColor,
   overflow: "hidden",
   maxHeight: 0,
-  transition: 'max-height .5s ease-out',
+  transition: 'max-height .5s ease-out, background 0s .5s ease-out',
   zIndex: 3,
   display: "flex",
   alignItems: "center",
-  // maxWidth: 639,
-  // opacity: 0.9,
+
+
   "@media": {
     [breakpoints.smallDesktop]: {
       width: "unset",
@@ -30,19 +42,22 @@ export const navMenu = style({
 })
 
 export const navMenuOpened = style({
-  maxHeight: '100%'
+  transition: 'max-height .5s ease-out, background 0s 0s ease-out',
+  maxHeight: '100%',
+  background: themeVars.backgroundColor,
 })
 export const menuItemsStyle = style({
   marginTop: "auto",
-  marginBottom: 0,
   paddingBottom: "5rem",
-  width: "100%",
   paddingLeft: 0,
+  marginLeft: "auto",
+  marginBottom: "1rem",
+  marginRight: "1rem",
 
   "@media": {
     [breakpoints.smallDesktop]: {
       display: 'flex',
-      paddingBottom: "unset"
+      paddingBottom: "initial"
     }
   }
 });
@@ -53,43 +68,51 @@ export const menuLinkStyle = style({
   whiteSpace: "nowrap",
   width: '100%',
   padding: 16,
+  fontFamily: 'Oswald',
+  color: themeVars.textColors.default,
   ':hover': {
-    backgroundColor: themeVars.buttonColors.primary.hoverBackground,
-    color: themeVars.buttonColors.primary.hoverText
+    backgroundColor: localThemeVars.hoverBackground,
+    color: localThemeVars.hoverText
   },
   "@media": {
     [breakpoints.smallDesktop]: {
       padding: 8,
+      color: localThemeVars.text,
       ':hover': {
-        backgroundColor: globalVars.colors.primaryDark,
-        color: themeVars.textColors.linkHover,
+        backgroundColor: localThemeVars.hoverBackground,
+        color: localThemeVars.hoverText
       },
     }
   }
 
 });
 
-
 export const hamburgerButton = style({
   position: "fixed",
   bottom: 0,
   width: "100vw",
+  height: "4rem",
   zIndex: 4,
-  height: "3rem",
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
-  backgroundColor: themeVars.buttonColors.primary.background,
+  backgroundColor: themeVars.buttonColors.secondary.background,
   left: 0,
+  boxShadow: "0 -1px 5px grey",
   ':hover': {
-    backgroundColor: themeVars.buttonColors.primary.hoverBackground
+    backgroundColor: themeVars.buttonColors.secondary.hoverBackground,
+    color: themeVars.buttonColors.secondary.hoverText
   },
   '@media': {
     [breakpoints.tablet]: {
       position: "relative",
-      width: "auto",
+      width: "4rem",
       backgroundColor: globalVars.colors.white,
       marginLeft: "auto",
+      boxShadow: "none",
+      ':hover': {
+        backgroundColor: themeVars.buttonColors.primary.hoverBackground,
+      },
     },
     [breakpoints.smallDesktop]: {
       display: "none"
@@ -98,7 +121,7 @@ export const hamburgerButton = style({
 })
 
 const hamburgerLineRules: CSSProperties = {
-  backgroundColor: themeVars.buttonColors.primary.text,
+  backgroundColor: themeVars.buttonColors.secondary.text,
   content: '',
   display: "block",
   height: "100%",
@@ -108,12 +131,11 @@ const hamburgerLineRules: CSSProperties = {
 
 }
 export const hamburgerLine = style({
-  background: themeVars.buttonColors.primary.text,
+  background: themeVars.buttonColors.secondary.text,
   display: "block",
   height: 2,
   position: 'relative',
   width: 24,
-  backgroundColor: globalVars.colors.white,
   '::before': {
     ...hamburgerLineRules,
     top: 8
@@ -121,17 +143,6 @@ export const hamburgerLine = style({
   '::after': {
     ...hamburgerLineRules,
     top: -8
-  },
-  '@media': {
-    [breakpoints.tablet]: {
-      backgroundColor: themeVars.textColors.default,
-      '::before': {
-        backgroundColor: themeVars.textColors.default,
-      },
-      '::after': {
-        backgroundColor: themeVars.textColors.default,
-      },
-    },
   }
 })
 

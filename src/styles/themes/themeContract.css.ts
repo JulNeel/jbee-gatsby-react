@@ -19,6 +19,12 @@ export const themeVars = createThemeContract({
       hoverBackground: null,
       hoverText: null,
     },
+    secondary: {
+      background: null,
+      text: null,
+      hoverBackground: null,
+      hoverText: null,
+    },
   },
   spaces: {
     auto: null,

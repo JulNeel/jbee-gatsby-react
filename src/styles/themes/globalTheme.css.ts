@@ -15,24 +15,24 @@ export const globalVars = createGlobalTheme(":root", {
     tablet: '800px',
     smallDesktop: '800px',
     largeDesktop: '1024px',
-  }
+  },
 })
 
-/* @font-face {
-  font-family: "Oswald";
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url(./Oswald-VariableFont_wght.ttf);
-}
-@font-face {
-  font-family: "Pacifico";
-  font-style: normal;
-  font-weight: 200;
-  font-display: swap;
-  src: url(./Pacifico-Regular.ttf);
-}
-body {
-  margin: 0;
-  font-family: "Oswald";
-} */
+// @font-face {
+//   font-family: "Oswald";
+//   font-style: normal;
+//   font-weight: 400;
+//   font-display: swap;
+//   src: url(./Oswald-VariableFont_wght.ttf);
+// }
+// @font-face {
+//   font-family: "Pacifico";
+//   font-style: normal;
+//   font-weight: 200;
+//   font-display: swap;
+//   src: url(./Pacifico-Regular.ttf);
+// }
+// body {
+//   margin: 0;
+//   font-family: "Oswald";
+// } 

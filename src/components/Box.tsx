@@ -1,6 +1,6 @@
 import React from "react";
 import clsx from "clsx";
-import { Sprinkles, sprinkles } from "../styles/sprinkles.css";
+import { sprinkles, Sprinkles } from "../styles/sprinkles.css";
 
 export type BoxProps = React.PropsWithChildren &
   Sprinkles &

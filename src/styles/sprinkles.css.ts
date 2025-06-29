@@ -21,7 +21,8 @@ const flexProperties = defineProperties({
     flexDirection: ['row', 'column'],
     justifyContent: ["start", "end", "center", "space-between", "space-around"],
     alignItems: ["start", "end", "center", "baseline", "stretch"],
-  }
+    width: { full: '100%', auto: 'auto' }
+  },
 })
 export const typoProperties = defineProperties({
   properties: {

@@ -1,8 +1,6 @@
 import { graphql, useStaticQuery } from "gatsby";
 import { getImage, ImageDataLike } from "gatsby-plugin-image";
 import React, { ReactNode } from "react";
-import "../styles/fonts/text.css";
-import "../styles/reset.css";
 import { lightTheme } from "../styles/themes/lightTheme.css";
 import Header from "./Header";
 import { contentStyle } from "./Layout.css";
