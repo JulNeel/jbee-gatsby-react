@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, PageProps, HeadProps, graphql } from "gatsby";
+import { PageProps, HeadProps, graphql } from "gatsby";
 import { GatsbyImage, getImage, ImageDataLike } from "gatsby-plugin-image";
 import parse from "html-react-parser";
 import Layout from "../components/Layout";
@@ -41,6 +41,7 @@ const PageTemplate: React.FC<PageProps<Queries.PageByIdQuery>> = ({ data: { curr
 
 export default PageTemplate;
 
+// HEAD COMPONENT FOR SEO
 export const Head: React.FC<HeadProps<Queries.PageByIdQuery>> = ({ data }) => {
   const { currentPage, site } = data;
 

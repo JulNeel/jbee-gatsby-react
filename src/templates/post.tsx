@@ -69,6 +69,7 @@ const PostTemplate: React.FC<PageProps<Queries.PostByIdQuery>> = ({
 
 export default PostTemplate;
 
+// HEAD COMPONENT FOR SEO
 export const Head: React.FC<HeadProps<Queries.PostByIdQuery>> = ({ data }) => {
   const { currentPost, site } = data;
 

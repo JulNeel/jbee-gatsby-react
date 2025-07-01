@@ -6,7 +6,7 @@ import { Box } from "./Box";
 import { headerContentStyle, headerStyle, logoStyle, scrolledHeaderStyle, scrolledLogoStyle } from "./Header.css";
 import { contentStyle } from "./Layout.css";
 import ResponsiveMenu from "./ResponsiveMenu";
-import { graphql, useStaticQuery } from "gatsby";
+import { graphql, Link, useStaticQuery } from "gatsby";
 interface HeaderProps {
   siteLogoData: IGatsbyImageData | null | undefined;
   siteLogoAltText: string;
@@ -37,9 +37,9 @@ const Header: React.FC<HeaderProps> = ({ siteLogoData, siteLogoAltText }) => {
   return (
     <Box as="header" className={clsx(headerStyle, { [scrolledHeaderStyle]: isScrolled })}>
       <Box as="div" className={clsx(contentStyle, headerContentStyle)}>
-        <Box as="div" className={clsx(logoStyle, { [scrolledLogoStyle]: isScrolled })}>
+        <Link to="/" className={clsx(logoStyle, { [scrolledLogoStyle]: isScrolled })}>
           {siteLogoData ? <GatsbyImage image={siteLogoData} alt={siteLogoAltText} /> : <p>Logo non disponible</p>}
-        </Box>
+        </Link>
         <ResponsiveMenu menuItems={menuItems} />
       </Box>
     </Box>
