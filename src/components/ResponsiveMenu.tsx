@@ -9,8 +9,8 @@ import {
   navMenu,
   navMenuOpened,
   noScroll,
-  primaryMenu,
-  secondaryMenu,
+  homeMenu,
+  defaultMenu,
 } from "./ResponsiveMenu.css";
 import clsx from "clsx";
 import { Link } from "gatsby";
@@ -22,10 +22,10 @@ type MenuItem = {
 
 export type ResponsiveMenuProps = {
   menuItems: MenuItem[];
-  colorSheme?: "primary" | "secondary";
+  context?: "home";
 };
 
-const ResponsiveMenu: React.FC<ResponsiveMenuProps> = ({ menuItems, colorSheme = "primary" }) => {
+const ResponsiveMenu: React.FC<ResponsiveMenuProps> = ({ menuItems, context }) => {
   const [isMenuOpened, setIsMenuOpened] = useState(false);
   useEffect(() => {
     if (isMenuOpened) {
@@ -52,8 +52,8 @@ const ResponsiveMenu: React.FC<ResponsiveMenuProps> = ({ menuItems, colorSheme =
         className={clsx(
           navMenu,
           { [navMenuOpened]: isMenuOpened },
-          { [primaryMenu]: colorSheme === "primary" },
-          { [secondaryMenu]: colorSheme === "secondary" }
+          { [homeMenu]: context === "home" },
+          { [defaultMenu]: context === undefined }
         )}
         aria-hidden={!isMenuOpened}
         role="navigation"

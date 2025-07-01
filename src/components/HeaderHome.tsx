@@ -2,9 +2,9 @@ import { graphql, useStaticQuery } from "gatsby";
 import * as React from "react";
 import * as styles from "./HeaderHome.css";
 import logo from "../assets/images/logo_jbee_dev_800_blanc.png";
-import HeaderMenu from "./HeaderMenu";
 import { Box } from "./Box";
 import { contentStyle } from "./Layout.css";
+import ResponsiveMenu from "./ResponsiveMenu";
 
 export default function Header(): JSX.Element {
   const data: Queries.HeaderHomeQuery = useStaticQuery(
@@ -21,11 +21,12 @@ export default function Header(): JSX.Element {
           }
         }
 
-        allWpMenuItem(filter: { menu: { node: { name: { eq: "menu sections" } } } }) {
-          nodes {
-            id
-            label
-            url
+        wpMenu(locations: { eq: GATSBY_HEADER_MENU }) {
+          menuItems {
+            nodes {
+              label
+              path
+            }
           }
         }
       }
@@ -33,6 +34,13 @@ export default function Header(): JSX.Element {
   );
 
   const headerImage = data.wp?.siteHeaderImage?.localFile?.url ?? "";
+  const menuItems =
+    data.wpMenu?.menuItems?.nodes
+      .filter((item): item is { label: string; path: string } => !!item.label)
+      .map((item) => ({
+        label: item.label!,
+        path: item.path ?? undefined,
+      })) ?? [];
 
   return (
     <header
@@ -46,7 +54,7 @@ export default function Header(): JSX.Element {
         <img className={`${styles.logo} `} src={logo} alt="logo"></img>
       </a>
       <Box as="div" className={contentStyle}>
-        <HeaderMenu isHome={true}></HeaderMenu>
+        <ResponsiveMenu menuItems={menuItems} context="home"></ResponsiveMenu>
       </Box>
     </header>
   );

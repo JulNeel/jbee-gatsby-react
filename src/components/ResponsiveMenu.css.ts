@@ -3,17 +3,19 @@ import { breakpoints } from "../styles/breakpoints";
 import { globalVars } from "../styles/themes/globalTheme.css";
 import { themeVars } from "../styles/themes/themeContract.css";
 
-export const [primaryMenu, localThemeVars] = createTheme({
+export const [defaultMenu, localThemeVars] = createTheme({
   background: themeVars.backgroundColor,
   text: globalVars.colors.primaryDark,
   hoverBackground: globalVars.colors.primary,
   hoverText: themeVars.textColors.white,
+  marginBottom: "0"
 })
-export const secondaryMenu = createTheme(localThemeVars, {
+export const homeMenu = createTheme(localThemeVars, {
   background: 'none',
   text: themeVars.textColors.white,
   hoverBackground: themeVars.textColors.white,
   hoverText: themeVars.textColors.default,
+  marginBottom: "1rem",
 
 })
 
@@ -51,7 +53,7 @@ export const menuItemsStyle = style({
   paddingBottom: "5rem",
   paddingLeft: 0,
   marginLeft: "auto",
-  marginBottom: "1rem",
+  marginBottom: localThemeVars.marginBottom,
   marginRight: "1rem",
 
   "@media": {
