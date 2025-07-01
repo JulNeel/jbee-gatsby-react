@@ -48,18 +48,13 @@ export const Head: React.FC<HeadProps<Queries.PageByIdQuery>> = ({ data }) => {
 
   const image = currentPage.featuredImage?.node?.sourceUrl;
   const url = `${site?.siteMetadata?.siteUrl}${currentPage.uri}`;
-  const {
-    title: defaultTitle,
-    description: defaultDescription,
-    author: defaultAuthor,
-    siteUrl: defaultSiteUrl,
-  } = useSiteMetadata();
+  const { title: defaultTitle, description: defaultDescription, author: defaultAuthor } = useSiteMetadata();
 
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Article",
     headline: currentPage.seo.title,
-    description: currentPage.seo.metaDesc,
+    description: currentPage.seo.metaDesc ?? defaultDescription,
     author: {
       "@type": "Person",
       name: defaultAuthor,
@@ -72,7 +67,7 @@ export const Head: React.FC<HeadProps<Queries.PageByIdQuery>> = ({ data }) => {
   return (
     <SEO
       title={currentPage.seo.title ?? currentPage.title ?? defaultTitle}
-      description={currentPage.seo.metaDesc ?? undefined}
+      description={currentPage.seo.metaDesc ?? defaultDescription}
       author={defaultAuthor}
       image={image ?? ""}
       url={url}

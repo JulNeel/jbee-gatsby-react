@@ -78,12 +78,7 @@ export const Head: React.FC<HeadProps<Queries.PostByIdQuery>> = ({ data }) => {
   const url = `${site?.siteMetadata?.siteUrl}${currentPost.uri}`;
   const authorName = `${currentPost.author?.node.name}`;
 
-  const {
-    title: defaultTitle,
-    description: defaultDescription,
-    author: defaultAuthor,
-    siteUrl: defaultSiteUrl,
-  } = useSiteMetadata();
+  const { title: defaultTitle, author: defaultAuthor } = useSiteMetadata();
 
   const jsonLd = {
     "@context": "https://schema.org",
