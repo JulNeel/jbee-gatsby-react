@@ -19,10 +19,11 @@ const PostTemplate: React.FC<PageProps<Queries.PostByIdQuery>> = ({
 
   return (
     <Layout isHomePage={false}>
-      <article className="blog-post" itemScope itemType="http://schema.org/Article">
+      <article className="blog-post" itemScope itemType="http://schema.org/BlogPosting">
         <header>
           <h1 itemProp="headline">{parse(currentPost?.title ?? "")}</h1>
           <p>{currentPost?.date}</p>
+          <p>{currentPost?.author?.node.name}</p>
           {imageData && (
             <GatsbyImage
               image={imageData}
@@ -75,6 +76,8 @@ export const Head: React.FC<HeadProps<Queries.PostByIdQuery>> = ({ data }) => {
 
   const image = currentPost.featuredImage?.node?.sourceUrl;
   const url = `${site?.siteMetadata?.siteUrl}${currentPost.uri}`;
+  const authorName = `${currentPost.author?.node.name}`;
+
   const {
     title: defaultTitle,
     description: defaultDescription,
@@ -112,14 +115,13 @@ export const Head: React.FC<HeadProps<Queries.PostByIdQuery>> = ({ data }) => {
   );
 };
 
-// GraphQL query
 export const postQuery = graphql`
   query PostById($id: String!, $previousPostId: String, $nextPostId: String) {
     currentPost: wpPost(id: { eq: $id }) {
       title
       content
       excerpt
-      date
+      date(formatString: "DD MMMM YYYY", locale: "fr")
       uri
       featuredImage {
         node {
