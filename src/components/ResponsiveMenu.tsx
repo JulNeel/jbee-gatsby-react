@@ -1,4 +1,6 @@
-import React, { Fragment, useEffect, useState } from "react";
+import clsx from "clsx";
+import { Link } from "gatsby";
+import React, { useEffect, useState } from "react";
 import { Box } from "./Box";
 import {
   hamburgerButton,
@@ -6,14 +8,12 @@ import {
   hamburgerLineOpened,
   menuItemsStyle,
   menuLinkStyle,
-  navMenu,
   navMenuOpened,
+  navMenuStyle,
   noScroll,
-  homeMenu,
-  defaultMenu,
+  transparentBackgroundMenu,
+  whiteBackgroundMenu,
 } from "./ResponsiveMenu.css";
-import clsx from "clsx";
-import { Link } from "gatsby";
 
 type MenuItem = {
   label: string;
@@ -22,11 +22,12 @@ type MenuItem = {
 
 export type ResponsiveMenuProps = {
   menuItems: MenuItem[];
-  context?: "home";
+  theme: "whiteBackgroundMenu" | "transparentBackgroundMenu";
 };
 
-const ResponsiveMenu: React.FC<ResponsiveMenuProps> = ({ menuItems, context }) => {
+const ResponsiveMenu: React.FC<ResponsiveMenuProps> = ({ menuItems, theme }) => {
   const [isMenuOpened, setIsMenuOpened] = useState(false);
+
   useEffect(() => {
     if (isMenuOpened) {
       document.body.classList.add(noScroll);
@@ -34,8 +35,9 @@ const ResponsiveMenu: React.FC<ResponsiveMenuProps> = ({ menuItems, context }) =
       document.body.classList.remove(noScroll);
     }
   }, [isMenuOpened]);
+
   return (
-    <Fragment>
+    <>
       <Box
         as="button"
         className={hamburgerButton}
@@ -50,10 +52,10 @@ const ResponsiveMenu: React.FC<ResponsiveMenuProps> = ({ menuItems, context }) =
         as="nav"
         id="main-menu"
         className={clsx(
-          navMenu,
-          { [navMenuOpened]: isMenuOpened },
-          { [homeMenu]: context === "home" },
-          { [defaultMenu]: context === undefined }
+          navMenuStyle,
+          { [whiteBackgroundMenu]: theme === "whiteBackgroundMenu" },
+          { [transparentBackgroundMenu]: theme === "transparentBackgroundMenu" },
+          { [navMenuOpened]: isMenuOpened }
         )}
         aria-hidden={!isMenuOpened}
         role="navigation"
@@ -63,17 +65,17 @@ const ResponsiveMenu: React.FC<ResponsiveMenuProps> = ({ menuItems, context }) =
             <Box
               as="li"
               fontFamily="oswald"
-              fontSize={{ mobile: "xxLarge", tablet: "xxLarge", smallDesktop: "xxLarge", largeDesktop: "xxLarge" }}
+              fontSize={{ mobile: "xxLarge", tablet: "xxLarge", smallDesktop: "large", largeDesktop: "large" }}
               key={menuItem.label}
             >
-              <Link className={menuLinkStyle} color="default" to={menuItem.path ?? "#"}>
+              <Link className={menuLinkStyle} to={menuItem.path ?? "#"}>
                 {menuItem.label}
               </Link>
             </Box>
           ))}
         </Box>
       </Box>
-    </Fragment>
+    </>
   );
 };
 

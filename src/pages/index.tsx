@@ -1,7 +1,10 @@
 import { PageProps } from "gatsby";
 import * as React from "react";
 import HeaderHome from "../components/HeaderHome";
+import PostsList from "../components/PostsList";
+import { Box } from "../components/Box";
 import { lightTheme } from "../styles/themes/lightTheme.css";
+import clsx from "clsx";
 
 const App: React.FC<PageProps> = () => {
   React.useEffect(() => {
@@ -12,8 +15,11 @@ const App: React.FC<PageProps> = () => {
     }
   }, []);
   return (
-    <div className={`${lightTheme} app`}>
+    <div className={clsx(lightTheme, "app")}>
       <HeaderHome></HeaderHome>
+      <Box as={"div"} className={"content"} py="32">
+        <PostsList />
+      </Box>
     </div>
   );
 };

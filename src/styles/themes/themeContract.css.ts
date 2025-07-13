@@ -41,6 +41,7 @@ export const themeVars = createThemeContract({
       headings: null,
       menu: null,
       body: null,
+      paragraph: null,
       oswald: null,
       roboto: null,
     },
@@ -56,18 +57,20 @@ export const themeVars = createThemeContract({
       h3: null,
       h2: null,
       h1: null,
-      body: null
+      paragraph: null
     },
 
     fontWeight: {
       regular: null,
       bold: null,
       body: null,
+      paragraph: null,
     },
     lineHeight: {
       tight: null,
       normal: null,
       relaxed: null,
+      headings: null,
     },
   },
 });

@@ -1,9 +1,9 @@
 import { graphql, useStaticQuery } from "gatsby";
 import { getImage, ImageDataLike } from "gatsby-plugin-image";
 import React, { ReactNode } from "react";
-import { lightTheme } from "../styles/themes/lightTheme.css";
 import Header from "./Header";
-import { contentStyle } from "./Layout.css";
+import { lightTheme } from "../styles/themes/lightTheme.css";
+import clsx from "clsx";
 
 interface LayoutProps {
   isHomePage: boolean;
@@ -50,10 +50,10 @@ const Layout: React.FC<LayoutProps> = ({ isHomePage, children }) => {
   const siteLogoAltText = data.wp?.siteLogo?.altText || "Site logo";
 
   return (
-    <div className={`global-wrapper ${lightTheme}`} data-is-root-path={isHomePage}>
+    <div className={clsx(lightTheme, "global-wrapper")} id={`global-wrapper`} data-is-root-path={isHomePage}>
       <Header siteLogoData={siteLogoData} siteLogoAltText={siteLogoAltText}></Header>
 
-      <main className={contentStyle}>{children}</main>
+      <main className={"content"}>{children}</main>
 
       <footer>
         © {new Date().getFullYear()}, Built with <a href="https://www.gatsbyjs.com">Gatsby</a> and{" "}

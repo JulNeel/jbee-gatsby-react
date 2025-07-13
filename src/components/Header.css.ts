@@ -1,4 +1,4 @@
-import { style, type CSSProperties } from "@vanilla-extract/css";
+import { style } from "@vanilla-extract/css";
 import { themeVars } from "../styles/themes/themeContract.css";
 import { breakpoints } from "../styles/breakpoints";
 
@@ -37,6 +37,7 @@ export const scrolledHeaderStyle = style({
 export const logoStyle = style({
   maxWidth: 220,
   transition: "max-width 0.5s",
+  paddingBlock: themeVars.spaces[4],
   '@media': {
     [breakpoints.tablet]: {
     },

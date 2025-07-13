@@ -63,6 +63,7 @@ globalStyle('ol, ul', {
   "@layer": {
     [baseLayer]: {
       listStyle: 'none',
+      marginBlockEnd: 0,
     }
   }
 });

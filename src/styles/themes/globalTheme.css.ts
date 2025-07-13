@@ -5,6 +5,7 @@ export const globalVars = createGlobalTheme(":root", {
   colors: {
     primary: '#4d7c94',
     primaryDark: '#375969',
+    primaryText: '#273e4a',
     secondary: '#ffc100',
     white: "white",
     good: 'lightgreen',
@@ -17,22 +18,3 @@ export const globalVars = createGlobalTheme(":root", {
     largeDesktop: '1024px',
   },
 })
-
-// @font-face {
-//   font-family: "Oswald";
-//   font-style: normal;
-//   font-weight: 400;
-//   font-display: swap;
-//   src: url(./Oswald-VariableFont_wght.ttf);
-// }
-// @font-face {
-//   font-family: "Pacifico";
-//   font-style: normal;
-//   font-weight: 200;
-//   font-display: swap;
-//   src: url(./Pacifico-Regular.ttf);
-// }
-// body {
-//   margin: 0;
-//   font-family: "Oswald";
-// } 

@@ -3,23 +3,21 @@ import { breakpoints } from "../styles/breakpoints";
 import { globalVars } from "../styles/themes/globalTheme.css";
 import { themeVars } from "../styles/themes/themeContract.css";
 
-export const [defaultMenu, localThemeVars] = createTheme({
+export const [whiteBackgroundMenu, localThemeVars] = createTheme({
   background: themeVars.backgroundColor,
   text: globalVars.colors.primaryDark,
   hoverBackground: globalVars.colors.primary,
   hoverText: themeVars.textColors.white,
-  marginBottom: "0"
 })
-export const homeMenu = createTheme(localThemeVars, {
+export const transparentBackgroundMenu = createTheme(localThemeVars, {
   background: 'none',
   text: themeVars.textColors.white,
   hoverBackground: themeVars.textColors.white,
   hoverText: themeVars.textColors.default,
-  marginBottom: "1rem",
 
 })
 
-export const navMenu = style({
+export const navMenuStyle = style({
   width: "100%",
   height: "100%",
   position: "fixed",
@@ -28,38 +26,44 @@ export const navMenu = style({
   overflow: "hidden",
   maxHeight: 0,
   transition: 'max-height .5s ease-out, background 0s .5s ease-out',
-  zIndex: 3,
+  zIndex: 4,
   display: "flex",
   alignItems: "center",
-
-
+  marginLeft: "auto",
+  background: localThemeVars.background,
+  marginBlockEnd: 0,
   "@media": {
     [breakpoints.smallDesktop]: {
       width: "unset",
       height: "unset",
       position: "relative",
       maxHeight: "unset",
+      transition: "none",
+      background: "none",
     }
   }
 })
+
+
 
 export const navMenuOpened = style({
   transition: 'max-height .5s ease-out, background 0s 0s ease-out',
   maxHeight: '100%',
   background: themeVars.backgroundColor,
+
 })
 export const menuItemsStyle = style({
   marginTop: "auto",
   paddingBottom: "5rem",
   paddingLeft: 0,
   marginLeft: "auto",
-  marginBottom: localThemeVars.marginBottom,
   marginRight: "1rem",
 
   "@media": {
     [breakpoints.smallDesktop]: {
       display: 'flex',
-      paddingBottom: "initial"
+      paddingBottom: "initial",
+      marginRight: 'unset',
     }
   }
 });
@@ -94,7 +98,7 @@ export const hamburgerButton = style({
   bottom: 0,
   width: "100vw",
   height: "4rem",
-  zIndex: 4,
+  zIndex: 9,
   display: "flex",
   justifyContent: "center",
   alignItems: "center",

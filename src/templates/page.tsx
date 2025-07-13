@@ -26,7 +26,7 @@ const PageTemplate: React.FC<PageProps<Queries.PageByIdQuery>> = ({ data: { curr
           {imageData && (
             <GatsbyImage
               image={imageData}
-              alt={currentPage?.featuredImage?.node?.altText || currentPage?.title || ""}
+              alt={currentPage?.featuredImage?.node?.altText ?? currentPage?.title ?? ""}
             />
           )}
         </header>
@@ -48,8 +48,8 @@ export const Head: React.FC<HeadProps<Queries.PageByIdQuery>> = ({ data }) => {
   if (!currentPage || !currentPage.seo) return null;
 
   const image = currentPage.featuredImage?.node?.sourceUrl;
-  const url = `${site?.siteMetadata?.siteUrl}${currentPage.uri}`;
-  const { title: defaultTitle, description: defaultDescription, author: defaultAuthor } = useSiteMetadata();
+  const { title: defaultTitle, description: defaultDescription, author: defaultAuthor, siteUrl } = useSiteMetadata();
+  const url = `${siteUrl}${currentPage.uri}`;
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -98,9 +98,8 @@ export const pageQuery = graphql`
         node {
           altText
           sourceUrl
-          gatsbyImage
+          gatsbyImage(layout: FULL_WIDTH)
           localFile {
-            publicURL
             childImageSharp {
               gatsbyImageData(width: 1200, formats: AUTO)
             }
