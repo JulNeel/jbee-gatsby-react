@@ -11,6 +11,7 @@ export const createPages: GatsbyNode["createPages"] = async ({ graphql, actions 
         edges {
           node {
             id
+            databaseId
             uri
           }
           previous {
@@ -22,7 +23,8 @@ export const createPages: GatsbyNode["createPages"] = async ({ graphql, actions 
         }
       }
       allWpPage {
-        nodes {
+        edges {
+          node {
           id
           uri
           wpChildren {
@@ -38,6 +40,7 @@ export const createPages: GatsbyNode["createPages"] = async ({ graphql, actions 
         }
       }
     }
+  }
   `);
 
   if (!result || !result.data) {
@@ -45,7 +48,7 @@ export const createPages: GatsbyNode["createPages"] = async ({ graphql, actions 
   }
 
   const allPosts = result.data.allWpPost.edges;
-  const allPages = result.data.allWpPage.nodes;
+  const allPages = result.data.allWpPage.edges;
   const postTemplate = path.resolve(`./src/templates/post.tsx`);
   const pageTemplate = path.resolve(`./src/templates/page.tsx`);
 
@@ -62,12 +65,12 @@ export const createPages: GatsbyNode["createPages"] = async ({ graphql, actions 
   });
   allPages.forEach((page) => {
     createPage({
-      path: page.uri ?? "",
+      path: page.node.uri ?? "",
       component: slash(pageTemplate),
       context: {
-        id: page.id,
-        childrenPages: page.wpChildren?.nodes,
-        parentPage: page.wpParent?.node.id,
+        id: page.node.id,
+        childrenPages: page.node.wpChildren?.nodes,
+        parentPage: page.node.wpParent?.node.id,
       },
     });
   });

@@ -11,7 +11,7 @@ import "@wordpress/block-library/build-style/theme.css";
 import { useSiteMetadata } from "../hooks/useSiteMetadata";
 
 const PostTemplate: React.FC<PageProps<Queries.PostByIdQuery>> = ({
-  data: { previousPost, nextPost, currentPost },
+  data: { previousPost, nextPost, currentPost, currentPostHtml },
 }) => {
   const imageData = currentPost?.featuredImage?.node?.localFile
     ? getImage(currentPost.featuredImage.node.localFile as ImageDataLike)
@@ -32,8 +32,12 @@ const PostTemplate: React.FC<PageProps<Queries.PostByIdQuery>> = ({
           )}
         </header>
 
-        {!!currentPost?.content && <section itemProp="articleBody">{parse(currentPost.content)}</section>}
-
+        {/* {!!currentPostHtml?.internal.content && (
+          <section itemProp="articleBody">{currentPostHtml?.internal.content}</section>
+        )} */}
+        {!!currentPostHtml?.html && (
+          <section itemProp="articleBody" dangerouslySetInnerHTML={{ __html: currentPostHtml.html }} />
+        )}
         <hr />
       </article>
 
@@ -115,7 +119,6 @@ export const postQuery = graphql`
   query PostById($id: String!, $previousPostId: String, $nextPostId: String) {
     currentPost: wpPost(id: { eq: $id }) {
       title
-      content
       excerpt
       date(formatString: "DD MMMM YYYY", locale: "fr")
       uri
@@ -143,6 +146,12 @@ export const postQuery = graphql`
         opengraphDescription
         metaRobotsNoindex
         metaRobotsNofollow
+      }
+    }
+    currentPostHtml: htmlRehype(parent: { id: { eq: $id } }) {
+      html
+      internal {
+        content
       }
     }
     site {
