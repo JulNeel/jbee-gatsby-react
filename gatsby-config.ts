@@ -2,7 +2,7 @@ import type { GatsbyConfig } from "gatsby";
 
 const config: GatsbyConfig = {
   siteMetadata: {
-    title: 'Julien Bruneel, développeur web qu\'il est bien',
+    title: 'Julien Bruneel, développeur web',
     author: 'Julien Bruneel',
     siteUrl: `https://julienbruneel.fr/`,
     description: "Un site statique rapide avec Gatsby",
@@ -18,10 +18,11 @@ const config: GatsbyConfig = {
     {
       resolve: `gatsby-plugin-transformer-rehype`,
       options: {
-        filter: node =>
-          node.internal.type === 'WpPost',
-        source: node =>
-          typeof node.content === 'string' && node.content.trim()
+        filter: (node: Queries.WpPost | Queries.WpPage) =>
+          node.internal.type === 'WpPost'
+          || node.internal.type === 'WpPage',
+        source: (node: Queries.WpPost | Queries.WpPage) =>
+          typeof node.content === 'string'
             ? node.content
             : null,
         plugins: [{
