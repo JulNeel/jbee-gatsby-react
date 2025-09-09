@@ -20,4 +20,12 @@ globalFontFace('Monserrat', {
   src: 'url(/fonts/Montserrat-VariableFont_wght.ttf)',
   fontDisplay: "swap"
 });
+globalFontFace('IBM', {
+  src: 'url(/fonts/IBMPlexMono-Regular.ttf)',
+  fontDisplay: "swap"
+});
+globalFontFace('GoogleSansCode', {
+  src: 'url(/fonts/GoogleSansCode-VariableFont_wght.ttf)',
+  fontDisplay: "swap"
+});
 
