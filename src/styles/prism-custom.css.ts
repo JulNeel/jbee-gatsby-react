@@ -1,7 +1,5 @@
-// src/styles/prism.css.ts
 import { style, globalStyle } from "@vanilla-extract/css";
 
-// Bouton "Copier"
 export const copyButton = style({
   position: "absolute",
   top: "0.5rem",
@@ -18,7 +16,6 @@ export const copyButton = style({
   },
 });
 
-// Styles globaux Prism (override du thème)
 globalStyle("pre", {
   position: "relative",
   borderRadius: "0.5rem",

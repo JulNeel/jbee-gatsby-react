@@ -1,30 +1,33 @@
 import { createTheme } from '@vanilla-extract/css';
-import { themeVars } from './themeContract.css'
 import { globalVars } from './globalTheme.css';
+import { themeVars } from './themeContract.css'
 
 export const lightTheme = createTheme(themeVars, {
-  backgroundColor: globalVars.colors.white,
+  backgroundColor: globalVars.wpColors.white,
   textColors: {
-    default: '#375969',
-    secondary: 'gray',
-    white: globalVars.colors.white,
-    brand: '#744ed4',
-    good: 'green',
-    bad: 'red',
-    linkHover: globalVars.colors.secondary
+    default: globalVars.wpColors.primarydark,
+    heading: globalVars.wpColors.primarydark,
+    link: globalVars.wpColors.primarydark,
+    linkHover: globalVars.wpColors.secondarydark,
+    secondary: globalVars.wpColors.secondarydark,
+    success: globalVars.wpColors.success,
+    danger: globalVars.wpColors.danger,
+    warning: globalVars.wpColors.warning,
+    white: globalVars.wpColors.white,
+    black: globalVars.wpColors.black
   },
   buttonColors: {
     primary: {
-      background: globalVars.colors.primaryDark,
-      text: globalVars.colors.white,
-      hoverBackground: globalVars.colors.primary,
-      hoverText: globalVars.colors.white
+      background: globalVars.wpColors.primarydark,
+      text: globalVars.wpColors.white,
+      hoverBackground: globalVars.wpColors.primary,
+      hoverText: globalVars.wpColors.white
     },
     secondary: {
-      background: globalVars.colors.white,
-      text: globalVars.colors.primaryDark,
-      hoverBackground: globalVars.colors.primary,
-      hoverText: globalVars.colors.white
+      background: globalVars.wpColors.white,
+      text: globalVars.wpColors.primarydark,
+      hoverBackground: globalVars.wpColors.primary,
+      hoverText: globalVars.wpColors.white
     },
   },
   spaces: {
@@ -39,18 +42,18 @@ export const lightTheme = createTheme(themeVars, {
   },
   typography: {
     fontFamily: {
-      headings: "Oswald",
+      heading: "Oswald",
       menu: "Oswald",
-      body: "Roboto",
-      paragraph: "Merriweather",
+      body: "Oswald",
+      paragraph: "Roboto",
       oswald: "Oswald",
       roboto: "Roboto",
     },
     fontSize: {
-      small: "1rem",
-      medium: "1.5rem",
-      large: "2rem",
-      xLarge: "3rem",
+      small: globalVars.wpFontSizes.small,
+      medium: globalVars.wpFontSizes.medium,
+      large: globalVars.wpFontSizes.large,
+      xLarge: globalVars.wpFontSizes['x-large'],
       xxLarge: "4rem",
       h6: '1.1rem',
       h5: '1.25rem',
@@ -70,7 +73,7 @@ export const lightTheme = createTheme(themeVars, {
       tight: "1",
       normal: "1.4",
       relaxed: "1.6",
-      headings: "1.6"
+      heading: "1.6"
     },
   },
 });

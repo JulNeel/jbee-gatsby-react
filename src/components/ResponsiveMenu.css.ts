@@ -5,8 +5,8 @@ import { themeVars } from "../styles/themes/themeContract.css";
 
 export const [whiteBackgroundMenu, localThemeVars] = createTheme({
   background: themeVars.backgroundColor,
-  text: globalVars.colors.primaryDark,
-  hoverBackground: globalVars.colors.primary,
+  text: themeVars.textColors.default,
+  hoverBackground: globalVars.wpColors.primary,
   hoverText: themeVars.textColors.white,
 })
 export const transparentBackgroundMenu = createTheme(localThemeVars, {
@@ -51,6 +51,9 @@ export const navMenuOpened = style({
   maxHeight: '100%',
   background: themeVars.backgroundColor,
 
+})
+export const menuItemStyle = style({
+  listStyle: "none",
 })
 export const menuItemsStyle = style({
   marginTop: "auto",
@@ -113,7 +116,7 @@ export const hamburgerButton = style({
     [breakpoints.tablet]: {
       position: "relative",
       width: "4rem",
-      backgroundColor: globalVars.colors.white,
+      backgroundColor: globalVars.wpColors.white,
       marginLeft: "auto",
       boxShadow: "none",
       ':hover': {

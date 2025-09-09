@@ -15,7 +15,7 @@ const App: React.FC<PageProps> = () => {
     }
   }, []);
   return (
-    <div className={clsx(lightTheme, "app")}>
+    <div className={clsx(lightTheme, "home")}>
       <HeaderHome></HeaderHome>
       <Box as={"div"} className={"content"} py="32">
         <PostsList />

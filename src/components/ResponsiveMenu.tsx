@@ -7,6 +7,7 @@ import {
   hamburgerLine,
   hamburgerLineOpened,
   menuItemsStyle,
+  menuItemStyle,
   menuLinkStyle,
   navMenuOpened,
   navMenuStyle,
@@ -64,6 +65,7 @@ const ResponsiveMenu: React.FC<ResponsiveMenuProps> = ({ menuItems, theme }) => 
           {menuItems.map((menuItem) => (
             <Box
               as="li"
+              className={menuItemStyle}
               fontFamily="oswald"
               fontSize={{ mobile: "xxLarge", tablet: "xxLarge", smallDesktop: "large", largeDesktop: "large" }}
               key={menuItem.label}

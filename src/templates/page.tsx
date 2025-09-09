@@ -5,10 +5,6 @@ import parse from "html-react-parser";
 import Layout from "../components/Layout";
 import { SEO } from "../components/SEO";
 
-// Gutenberg block styles
-import "@wordpress/block-library/build-style/style.css";
-import "@wordpress/block-library/build-style/theme.css";
-
 import { useSiteMetadata } from "../hooks/useSiteMetadata";
 import { Box } from "../components/Box";
 
@@ -69,8 +65,7 @@ export const Head: React.FC<HeadProps<Queries.PageByIdQuery>> = ({ data }) => {
     <SEO
       title={currentPage.seo.title ?? currentPage.title ?? defaultTitle}
       description={currentPage.seo.metaDesc ?? defaultDescription}
-      author={defaultAuthor}
-      image={image ?? ""}
+      image={image ?? undefined}
       url={url}
       type="article"
       canonical={url}

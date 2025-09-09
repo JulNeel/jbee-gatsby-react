@@ -5,12 +5,15 @@ export const themeVars = createThemeContract({
   backgroundColor: null,
   textColors: {
     default: null,
-    secondary: null,
-    white: null,
-    brand: null,
-    good: null,
-    bad: null,
+    heading: null,
+    link: null,
     linkHover: null,
+    secondary: null,
+    success: null,
+    danger: null,
+    warning: null,
+    white: null,
+    black: null,
   },
   buttonColors: {
     primary: {
@@ -38,7 +41,7 @@ export const themeVars = createThemeContract({
   },
   typography: {
     fontFamily: {
-      headings: null,
+      heading: null,
       menu: null,
       body: null,
       paragraph: null,
@@ -70,7 +73,7 @@ export const themeVars = createThemeContract({
       tight: null,
       normal: null,
       relaxed: null,
-      headings: null,
+      heading: null,
     },
   },
 });

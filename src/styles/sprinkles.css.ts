@@ -5,7 +5,7 @@ import { globalVars } from './themes/globalTheme.css';
 
 export const colorProperties = defineProperties({
   properties: {
-    backgroundColor: globalVars.colors,
+    backgroundColor: globalVars.wpColors,
     color: themeVars.textColors,
   },
 });

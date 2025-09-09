@@ -5,14 +5,14 @@ import parse from "html-react-parser";
 import Layout from "../components/Layout";
 import { SEO } from "../components/SEO";
 
-// Gutenberg block styles
-import "@wordpress/block-library/build-style/style.css";
-import "@wordpress/block-library/build-style/theme.css";
 import { useSiteMetadata } from "../hooks/useSiteMetadata";
+import { Box } from "../components/Box";
+import { blogPostNavItemStyle, blogPostNavStyle } from "./post.css";
 
 const PostTemplate: React.FC<PageProps<Queries.PostByIdQuery>> = ({
   data: { previousPost, nextPost, currentPost, currentPostHtml },
 }) => {
+  const authorName = currentPost?.author?.node.name || useSiteMetadata().author;
   const imageData = currentPost?.featuredImage?.node?.localFile
     ? getImage(currentPost.featuredImage.node.localFile as ImageDataLike)
     : undefined;
@@ -22,8 +22,19 @@ const PostTemplate: React.FC<PageProps<Queries.PostByIdQuery>> = ({
       <article className="blog-post" itemScope itemType="http://schema.org/BlogPosting">
         <header>
           <h1 itemProp="headline">{parse(currentPost?.title ?? "")}</h1>
-          <p>{currentPost?.date}</p>
-          <p>{currentPost?.author?.node.name}</p>
+          <Box
+            as="div"
+            className="blog-post-meta"
+            display="flex"
+            justifyContent="space-between"
+            mb={"8"}
+            backgroundColor="primary"
+            padding={"8"}
+            color="white"
+          >
+            <span>par {authorName}</span>
+            <span>{currentPost?.date}</span>
+          </Box>
           {imageData && (
             <GatsbyImage
               image={imageData}
@@ -32,40 +43,28 @@ const PostTemplate: React.FC<PageProps<Queries.PostByIdQuery>> = ({
           )}
         </header>
 
-        {/* {!!currentPostHtml?.internal.content && (
-          <section itemProp="articleBody">{currentPostHtml?.internal.content}</section>
-        )} */}
-        {!!currentPostHtml?.html && (
-          <section itemProp="articleBody" dangerouslySetInnerHTML={{ __html: currentPostHtml.html }} />
-        )}
+        {!!currentPostHtml?.html && <section itemProp="articleBody">{parse(currentPostHtml?.html)}</section>}
+
         <hr />
       </article>
 
-      <nav className="blog-post-nav">
-        <ul
-          style={{
-            display: "flex",
-            flexWrap: "wrap",
-            justifyContent: "space-between",
-            listStyle: "none",
-            padding: 0,
-          }}
-        >
-          <li>
+      <nav>
+        <Box as={"ul"} fontSize={"small"} className={blogPostNavStyle}>
+          <Box as={"li"} marginRight={"auto"} className={blogPostNavItemStyle}>
             {previousPost && (
               <Link to={previousPost.uri ?? ""} rel="prev">
                 ← {parse(previousPost.title ?? "")}
               </Link>
             )}
-          </li>
-          <li>
+          </Box>
+          <Box marginLeft={"auto"} as={"li"} className={blogPostNavItemStyle}>
             {nextPost && (
               <Link to={nextPost.uri ?? ""} rel="next">
                 {parse(nextPost.title ?? "")} →
               </Link>
             )}
-          </li>
-        </ul>
+          </Box>
+        </Box>
       </nav>
     </Layout>
   );
@@ -79,11 +78,10 @@ export const Head: React.FC<HeadProps<Queries.PostByIdQuery>> = ({ data }) => {
 
   if (!currentPost || !currentPost.seo) return null;
 
+  const { title: defaultTitle, author: defaultAuthor } = useSiteMetadata();
   const image = currentPost.featuredImage?.node?.sourceUrl;
   const url = `${site?.siteMetadata?.siteUrl}${currentPost.uri}`;
-  const authorName = `${currentPost.author?.node.name}`;
-
-  const { title: defaultTitle, author: defaultAuthor } = useSiteMetadata();
+  const authorName = currentPost.author?.node.name ?? defaultAuthor;
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -92,7 +90,7 @@ export const Head: React.FC<HeadProps<Queries.PostByIdQuery>> = ({ data }) => {
     description: currentPost.seo.metaDesc,
     author: {
       "@type": "Person",
-      name: currentPost.author?.node?.name,
+      name: authorName,
     },
     datePublished: currentPost.date,
     mainEntityOfPage: url,
@@ -103,7 +101,6 @@ export const Head: React.FC<HeadProps<Queries.PostByIdQuery>> = ({ data }) => {
     <SEO
       title={currentPost.seo.title ?? currentPost.title ?? defaultTitle}
       description={currentPost.seo.metaDesc ? currentPost.seo.metaDesc : currentPost.excerpt ?? undefined}
-      author={currentPost.author?.node.name ?? defaultAuthor}
       image={image ?? ""}
       url={url}
       type="article"
