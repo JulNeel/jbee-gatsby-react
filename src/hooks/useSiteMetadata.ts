@@ -8,12 +8,17 @@ type SiteMetadata = {
       siteUrl: string;
       author: string;
     };
-  };
+  }
+  wp: {
+    siteLogo: {
+      sourceUrl: string;
+    };
+  }
 };
 
 
 export const useSiteMetadata = () => {
-  const { site } = useStaticQuery<SiteMetadata>(graphql`
+  const { site, wp } = useStaticQuery<SiteMetadata>(graphql`
     query SiteMetadata {
       site {
         siteMetadata {
@@ -23,8 +28,13 @@ export const useSiteMetadata = () => {
           author
         }
       }
+      wp{
+        siteLogo {
+          sourceUrl
+        }
+      }
     }
   `);
 
-  return site.siteMetadata;
+  return { ...site.siteMetadata, siteLogoUrl: wp.siteLogo.sourceUrl };
 };

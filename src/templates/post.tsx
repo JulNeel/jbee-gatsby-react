@@ -72,52 +72,13 @@ const PostTemplate: React.FC<PageProps<Queries.PostByIdQuery>> = ({
 
 export default PostTemplate;
 
-// HEAD COMPONENT FOR SEO
-export const Head: React.FC<HeadProps<Queries.PostByIdQuery>> = ({ data }) => {
-  const { currentPost, site } = data;
-
-  if (!currentPost || !currentPost.seo) return null;
-
-  const { title: defaultTitle, author: defaultAuthor } = useSiteMetadata();
-  const image = currentPost.featuredImage?.node?.sourceUrl;
-  const url = `${site?.siteMetadata?.siteUrl}${currentPost.uri}`;
-  const authorName = currentPost.author?.node.name ?? defaultAuthor;
-
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    headline: currentPost.seo.title,
-    description: currentPost.seo.metaDesc,
-    author: {
-      "@type": "Person",
-      name: authorName,
-    },
-    datePublished: currentPost.date,
-    mainEntityOfPage: url,
-    image,
-  };
-
-  return (
-    <SEO
-      title={currentPost.seo.title ?? currentPost.title ?? defaultTitle}
-      description={currentPost.seo.metaDesc ? currentPost.seo.metaDesc : currentPost.excerpt ?? undefined}
-      image={image ?? ""}
-      url={url}
-      type="article"
-      canonical={url}
-      jsonLd={jsonLd}
-      noindex={currentPost.seo.metaRobotsNoindex === "noindex"}
-      nofollow={currentPost.seo.metaRobotsNofollow === "nofollow"}
-    />
-  );
-};
-
 export const postQuery = graphql`
   query PostById($id: String!, $previousPostId: String, $nextPostId: String) {
     currentPost: wpPost(id: { eq: $id }) {
       title
       excerpt
       date(formatString: "DD MMMM YYYY", locale: "fr")
+      modified
       uri
       featuredImage {
         node {
@@ -154,6 +115,7 @@ export const postQuery = graphql`
     site {
       siteMetadata {
         siteUrl
+        title
       }
     }
 
@@ -168,3 +130,85 @@ export const postQuery = graphql`
     }
   }
 `;
+
+// HEAD COMPONENT FOR SEO
+export const Head: React.FC<HeadProps<Queries.PostByIdQuery>> = ({ data }) => {
+  const { currentPost, site } = data;
+
+  if (!currentPost || !currentPost.seo) return null;
+
+  const {
+    title: defaultTitle,
+    description: defaultDescription,
+    author: defaultAuthor,
+    siteUrl,
+    siteLogoUrl,
+  } = useSiteMetadata();
+
+  const seoTitle = currentPost.seo.title ?? currentPost.title ?? defaultTitle;
+  const seoDescription = currentPost.seo.metaDesc ?? currentPost.excerpt ?? defaultDescription;
+  const image = currentPost.featuredImage?.node?.sourceUrl ?? undefined;
+  const url = `${siteUrl}${currentPost.uri}`;
+  const authorName = currentPost.author?.node.name ?? defaultAuthor;
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BlogPosting",
+        headline: seoTitle,
+        description: seoDescription,
+        author: {
+          "@type": "Person",
+          name: authorName,
+        },
+        datePublished: currentPost.date,
+        dateModified: currentPost.modified ?? currentPost.date,
+        mainEntityOfPage: {
+          "@type": "WebPage",
+          "@id": url,
+        },
+        ...(image && {
+          image: {
+            "@type": "ImageObject",
+            url: image,
+          },
+        }),
+        publisher: {
+          "@type": "Organization",
+          name: site?.siteMetadata?.title ?? defaultTitle,
+          logo: {
+            "@type": "ImageObject",
+            url: siteLogoUrl,
+          },
+        },
+      },
+      {
+        "@type": "WebPage",
+        "@id": url,
+        url,
+        name: seoTitle,
+        description: seoDescription,
+        isPartOf: {
+          "@type": "WebSite",
+          url: siteUrl,
+          name: site?.siteMetadata?.title ?? defaultTitle,
+        },
+      },
+    ],
+  };
+
+  return (
+    <SEO
+      title={seoTitle}
+      description={seoDescription}
+      image={image}
+      url={url}
+      type="article"
+      canonical={url}
+      jsonLd={jsonLd}
+      noindex={currentPost.seo.metaRobotsNoindex === "noindex"}
+      nofollow={currentPost.seo.metaRobotsNofollow === "nofollow"}
+    />
+  );
+};

@@ -4,6 +4,7 @@ import React, { ReactNode } from "react";
 import Header from "./Header";
 import { lightTheme } from "../styles/themes/lightTheme.css";
 import clsx from "clsx";
+import { Box } from "./Box";
 
 interface LayoutProps {
   isHomePage: boolean;
@@ -29,17 +30,6 @@ const Layout: React.FC<LayoutProps> = ({ isHomePage, children }) => {
             }
           }
         }
-        siteFavicon {
-          altText
-          fileSize
-          srcSet
-          sourceUrl
-          localFile {
-            childImageSharp {
-              gatsbyImageData(placeholder: NONE)
-            }
-          }
-        }
       }
     }
   `);
@@ -50,15 +40,15 @@ const Layout: React.FC<LayoutProps> = ({ isHomePage, children }) => {
   const siteLogoAltText = data.wp?.siteLogo?.altText || "Site logo";
 
   return (
-    <div className={clsx(lightTheme, "global-wrapper")} id={`global-wrapper`} data-is-root-path={isHomePage}>
+    <div className={clsx(lightTheme, "layout")} id={`layout`} data-is-root-path={isHomePage}>
       <Header siteLogoData={siteLogoData} siteLogoAltText={siteLogoAltText}></Header>
 
       <main className={"content"}>{children}</main>
 
-      <footer>
+      <Box as="footer" padding={"64"}>
         © {new Date().getFullYear()}, Built with <a href="https://www.gatsbyjs.com">Gatsby</a> and{" "}
         <a href="https://wordpress.org/">WordPress</a>
-      </footer>
+      </Box>
     </div>
   );
 };

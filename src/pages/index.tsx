@@ -1,10 +1,12 @@
-import { PageProps } from "gatsby";
+import { HeadProps, PageProps } from "gatsby";
 import * as React from "react";
 import HeaderHome from "../components/HeaderHome";
 import PostsList from "../components/PostsList";
 import { Box } from "../components/Box";
 import { lightTheme } from "../styles/themes/lightTheme.css";
 import clsx from "clsx";
+import { SEO } from "../components/SEO";
+import { useSiteMetadata } from "../hooks/useSiteMetadata";
 
 const App: React.FC<PageProps> = () => {
   React.useEffect(() => {
@@ -25,3 +27,55 @@ const App: React.FC<PageProps> = () => {
 };
 
 export default App;
+
+// HEAD COMPONENT FOR SEO
+export const Head: React.FC = () => {
+  const { title: defaultTitle, description: defaultDescription, siteUrl, siteLogoUrl } = useSiteMetadata();
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": `${siteUrl}#website`,
+        url: siteUrl,
+        name: defaultTitle,
+        description: defaultDescription,
+        publisher: {
+          "@type": "Organization",
+          name: defaultTitle,
+          logo: {
+            "@type": "ImageObject",
+            url: siteLogoUrl,
+          },
+        },
+        potentialAction: {
+          "@type": "SearchAction",
+          target: `${siteUrl}/?s={search_term_string}`,
+          "query-input": "required name=search_term_string",
+        },
+      },
+      {
+        "@type": "WebPage",
+        "@id": `${siteUrl}#webpage`,
+        url: siteUrl,
+        name: defaultTitle,
+        description: defaultDescription,
+        isPartOf: {
+          "@id": `${siteUrl}#website`,
+        },
+      },
+    ],
+  };
+
+  return (
+    <SEO
+      title={defaultTitle}
+      description={defaultDescription}
+      url={siteUrl}
+      type="website"
+      canonical={siteUrl}
+      jsonLd={jsonLd}
+    />
+  );
+};

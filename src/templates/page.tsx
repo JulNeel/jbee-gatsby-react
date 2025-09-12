@@ -37,45 +37,6 @@ const PageTemplate: React.FC<PageProps<Queries.PageByIdQuery>> = ({ data: { curr
 
 export default PageTemplate;
 
-// HEAD COMPONENT FOR SEO
-export const Head: React.FC<HeadProps<Queries.PageByIdQuery>> = ({ data }) => {
-  const { currentPage, site } = data;
-
-  if (!currentPage || !currentPage.seo) return null;
-
-  const image = currentPage.featuredImage?.node?.sourceUrl;
-  const { title: defaultTitle, description: defaultDescription, author: defaultAuthor, siteUrl } = useSiteMetadata();
-  const url = `${siteUrl}${currentPage.uri}`;
-
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    headline: currentPage.seo.title,
-    description: currentPage.seo.metaDesc ?? defaultDescription,
-    author: {
-      "@type": "Person",
-      name: defaultAuthor,
-    },
-    datePublished: currentPage.date,
-    mainEntityOfPage: url,
-    image,
-  };
-
-  return (
-    <SEO
-      title={currentPage.seo.title ?? currentPage.title ?? defaultTitle}
-      description={currentPage.seo.metaDesc ?? defaultDescription}
-      image={image ?? undefined}
-      url={url}
-      type="article"
-      canonical={url}
-      jsonLd={jsonLd}
-      noindex={currentPage.seo.metaRobotsNoindex === "noindex"}
-      nofollow={currentPage.seo.metaRobotsNofollow === "nofollow"}
-    />
-  );
-};
-
 export const pageQuery = graphql`
   query PageById($id: String) {
     currentPage: wpPage(id: { eq: $id }) {
@@ -127,3 +88,70 @@ export const pageQuery = graphql`
     }
   }
 `;
+
+// HEAD COMPONENT FOR SEO
+export const Head: React.FC<HeadProps<Queries.PageByIdQuery>> = ({ data }) => {
+  const { currentPage } = data;
+
+  if (!currentPage || !currentPage.seo) return null;
+
+  const {
+    title: defaultTitle,
+    description: defaultDescription,
+    author: defaultAuthor,
+    siteUrl,
+    siteLogoUrl,
+  } = useSiteMetadata();
+
+  const seoTitle = currentPage.seo.title ?? currentPage.title ?? defaultTitle;
+  const seoDescription = currentPage.seo.metaDesc ?? defaultDescription;
+  const image = currentPage.featuredImage?.node?.sourceUrl ?? undefined;
+  const url = `${siteUrl}${currentPage.uri}`;
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": url,
+        url,
+        name: seoTitle,
+        description: seoDescription,
+        ...(image && {
+          image: {
+            "@type": "ImageObject",
+            url: image,
+          },
+        }),
+        isPartOf: {
+          "@type": "WebSite",
+          "@id": `${siteUrl}#website`,
+          url: siteUrl,
+          name: defaultTitle,
+          publisher: {
+            "@type": "Organization",
+            name: defaultAuthor,
+            logo: {
+              "@type": "ImageObject",
+              url: siteLogoUrl,
+            },
+          },
+        },
+      },
+    ],
+  };
+
+  return (
+    <SEO
+      title={seoTitle}
+      description={seoDescription}
+      image={image}
+      url={url}
+      type="website"
+      canonical={url}
+      jsonLd={jsonLd}
+      noindex={currentPage.seo.metaRobotsNoindex === "noindex"}
+      nofollow={currentPage.seo.metaRobotsNofollow === "nofollow"}
+    />
+  );
+};
