@@ -82,26 +82,10 @@ Object.entries(globalVars.wpFontSizes).forEach(([name, value]) => {
     fontSize: value,
   });
 });
-// Object.entries(globalVars.colors).forEach(([name, value]) => {
-//   globalStyle(`.has-${name}-color`, {
-//     "@layer": {
-//       [componentsLayer]: {
-//         color: value,
-//       },
-//     },
-//   });
 
-//   globalStyle(`.has-${name}-background-color`, {
-//     "@layer": {
-//       [componentsLayer]: {
-//         backgroundColor: value,
-//       },
-//     },
-//   });
-// });
 
 globalStyle('.content', ({
-  maxWidth: globalVars.contentMaxWidth.mobile,
+  maxWidth: globalVars.contentMaxWidth.small,
   width: '100%',
   margin: "0 auto",
   paddingLeft: "1rem",
@@ -109,13 +93,13 @@ globalStyle('.content', ({
   boxSizing: "border-box",
   '@media': {
     [breakpoints.tablet]: {
-      maxWidth: globalVars.contentMaxWidth.tablet,
+      maxWidth: globalVars.contentMaxWidth.small,
     },
     [breakpoints.smallDesktop]: {
-      maxWidth: globalVars.contentMaxWidth.smallDesktop,
+      maxWidth: globalVars.contentMaxWidth.small,
     },
     [breakpoints.largeDesktop]: {
-      maxWidth: globalVars.contentMaxWidth.largeDesktop,
+      maxWidth: globalVars.contentMaxWidth.large,
     },
   }
 }))

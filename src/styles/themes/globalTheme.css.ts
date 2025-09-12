@@ -23,9 +23,7 @@ export const globalVars = createGlobalTheme(":root", {
     "x-large": "3rem",
   },
   contentMaxWidth: {
-    mobile: '800px',
-    tablet: '800px',
-    smallDesktop: '800px',
-    largeDesktop: '1024px',
+    small: '800px',
+    large: '1024px',
   },
 })

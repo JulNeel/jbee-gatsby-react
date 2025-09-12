@@ -41,12 +41,6 @@ export const menuWrapperStyle = style({
   boxShadow: "none",
   transition: "all .5s ease-out",
   background: "none",
-  "@media": {
-    [breakpoints.smallDesktop]: {
-
-
-    }
-  }
 })
 export const stickedMenuWrapperStyle = style({
   position: "fixed",

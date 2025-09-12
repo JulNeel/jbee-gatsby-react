@@ -1,26 +1,14 @@
 import { style } from "@vanilla-extract/css";
-import { globalVars } from "../styles/themes/globalTheme.css";
-import { breakpoints } from "../styles/breakpoints";
 
-export const postsListStyle = style({
-  maxWidth: globalVars.contentMaxWidth.mobile,
-  display: "grid",
-  gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-  gap: "2rem",
+export const postsListStyle = style([
 
-  '@media': {
-    [breakpoints.tablet]: {
-      maxWidth: globalVars.contentMaxWidth.tablet,
-    },
-    [breakpoints.smallDesktop]: {
-      maxWidth: globalVars.contentMaxWidth.smallDesktop,
-    },
-    [breakpoints.largeDesktop]: {
-      maxWidth: globalVars.contentMaxWidth.largeDesktop,
-    },
-  }
+  {
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+    gap: "2rem"
 
-})
+  }]
+)
 
 export const thumbnailWrapperStyle = style({
   height: 300,

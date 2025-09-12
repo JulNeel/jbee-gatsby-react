@@ -1,6 +1,7 @@
 import { createSprinkles, defineProperties } from '@vanilla-extract/sprinkles';
 import { themeVars } from './themes/themeContract.css';
 import { globalVars } from './themes/globalTheme.css';
+import { breakpoints } from './breakpoints';
 
 
 export const colorProperties = defineProperties({
@@ -36,9 +37,9 @@ export const typoProperties = defineProperties({
 export const responsiveProperties = defineProperties({
   conditions: {
     mobile: {},
-    tablet: { '@media': 'screen and (min-width: 640px)' },
-    smallDesktop: { '@media': 'screen and (min-width: 1024px)' },
-    largeDesktop: { '@media': 'screen and (min-width: 1280px)' },
+    tablet: { '@media': breakpoints.tablet },
+    smallDesktop: { '@media': breakpoints.smallDesktop },
+    largeDesktop: { '@media': breakpoints.largeDesktop },
   },
   responsiveArray: ['mobile', 'tablet', 'largeDesktop', 'smallDesktop'],
   defaultCondition: 'mobile',
