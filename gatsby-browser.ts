@@ -1,7 +1,6 @@
 import "prismjs";
 import "prismjs/themes/prism-okaidia.css";
 import "prismjs/components/prism-typescript";
-import "./src/styles/layers.css.ts";
 import "@wordpress/block-library/build-style/style.css";
 import "@wordpress/block-library/build-style/theme.css";
 import "./src/styles/global-vanilla.css.ts";

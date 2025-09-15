@@ -2,7 +2,7 @@ import { globalStyle } from "@vanilla-extract/css";
 import { globalVars } from "./themes/globalTheme.css";
 import { themeVars } from "./themes/themeContract.css";
 import { breakpoints } from "./breakpoints";
-//import { componentsLayer } from "./layers.css";
+
 
 globalStyle('.home, .layout', {
   fontFamily: themeVars.typography.fontFamily.body,
@@ -15,7 +15,6 @@ globalStyle('h1, h2, h3, h4, h5, h6', {
   fontFamily: themeVars.typography.fontFamily.heading,
   lineHeight: themeVars.typography.lineHeight.heading,
   fontWeight: themeVars.typography.fontWeight.bold,
-  color: themeVars.textColors.heading
 })
 globalStyle('.wp-block-group :is(h1, h2, h3, h4, h5, h6)', {
   marginTop: 0
@@ -61,27 +60,15 @@ globalStyle('.wp-element-caption', {
 
 })
 globalStyle('a', {
+
   color: themeVars.textColors.link,
-  textDecoration: "none",
+  textDecoration: "underline",
+
 })
 
-// Here, we dynamically create css rules based on the classes created by Wordpress Gutenberg
-// and the colors and font sizes variables defined in globalTheme.css
-
-Object.entries(globalVars.wpColors).forEach(([name, value]) => {
-  globalStyle(`.has-${name}-color`, {
-    color: value,
-  });
-
-  globalStyle(`.has-${name}-background-color`, {
-    backgroundColor: value,
-  });
-});
-Object.entries(globalVars.wpFontSizes).forEach(([name, value]) => {
-  globalStyle(`.has-${name}-font-size`, {
-    fontSize: value,
-  });
-});
+globalStyle('a:hover', {
+  color: themeVars.textColors.linkHover,
+})
 
 
 globalStyle('.content', ({
@@ -103,3 +90,4 @@ globalStyle('.content', ({
     },
   }
 }))
+

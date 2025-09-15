@@ -6,7 +6,6 @@ import Layout from "../components/Layout";
 import { SEO } from "../components/SEO";
 
 import { useSiteMetadata } from "../hooks/useSiteMetadata";
-import { Box } from "../components/Box";
 
 const PageTemplate: React.FC<PageProps<Queries.PageByIdQuery>> = ({ data: { currentPage } }) => {
   const imageData = currentPage?.featuredImage?.node?.localFile
@@ -15,10 +14,9 @@ const PageTemplate: React.FC<PageProps<Queries.PageByIdQuery>> = ({ data: { curr
 
   return (
     <Layout isHomePage={false}>
-      <article className="blog-post" itemScope itemType="http://schema.org/WebPage">
+      <article itemScope itemType="http://schema.org/WebPage">
         <header>
           <h1 itemProp="headline">{parse(currentPage?.title ?? "")}</h1>
-          <p>{currentPage?.date}</p>
           {imageData && (
             <GatsbyImage
               image={imageData}
@@ -28,8 +26,6 @@ const PageTemplate: React.FC<PageProps<Queries.PageByIdQuery>> = ({ data: { curr
         </header>
 
         {!!currentPage?.content && <section itemProp="articleBody">{parse(currentPage.content)}</section>}
-
-        <Box as={"hr"} mb={"64"} />
       </article>
     </Layout>
   );

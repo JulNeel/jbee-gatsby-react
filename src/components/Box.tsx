@@ -4,7 +4,7 @@ import { sprinkles, Sprinkles } from "../styles/sprinkles.css";
 
 export type BoxProps = React.PropsWithChildren &
   Sprinkles &
-  Omit<React.AllHTMLAttributes<HTMLElement>, "color" | "height" | "width"> & {
+  Omit<React.AllHTMLAttributes<HTMLElement>, "color"> & {
     as?: React.ElementType;
   };
 

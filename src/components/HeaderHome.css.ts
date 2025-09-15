@@ -1,10 +1,11 @@
 import { style } from "@vanilla-extract/css";
 import { breakpoints } from "../styles/breakpoints";
 import { themeVars } from "../styles/themes/themeContract.css";
+import { sprinkles } from "../styles/sprinkles.css";
 
 export const headerHomeStyle = style({
   width: "100%",
-  minHeight: "100vh",
+  minHeight: "500px",
   backgroundColor: "gray",
   display: "flex",
   flexDirection: "column",
@@ -32,8 +33,10 @@ export const logoWrapperStyle = style({
   justifyContent: 'center',
   flexGrow: 1
 })
+
 export const logoStyle = style({
   maxWidth: "95vw",
+  width: "500px"
 });
 
 export const menuWrapperStyle = style({

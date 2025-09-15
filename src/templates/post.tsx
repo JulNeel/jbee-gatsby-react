@@ -19,7 +19,7 @@ const PostTemplate: React.FC<PageProps<Queries.PostByIdQuery>> = ({
 
   return (
     <Layout isHomePage={false}>
-      <article className="blog-post" itemScope itemType="http://schema.org/BlogPosting">
+      <article itemScope itemType="http://schema.org/BlogPosting">
         <header>
           <h1 itemProp="headline">{parse(currentPost?.title ?? "")}</h1>
           <Box
@@ -45,7 +45,7 @@ const PostTemplate: React.FC<PageProps<Queries.PostByIdQuery>> = ({
 
         {!!currentPostHtml?.html && <section itemProp="articleBody">{parse(currentPostHtml?.html)}</section>}
 
-        <hr />
+        <Box as={"hr"} my={"64"} />
       </article>
 
       <nav>

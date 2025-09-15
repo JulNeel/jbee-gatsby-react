@@ -4,6 +4,7 @@ import { Box } from "./Box";
 import { GatsbyImage } from "gatsby-plugin-image";
 import parse from "html-react-parser";
 import { postsListStyle, thumbnailStyle, thumbnailWrapperStyle } from "./PostsList.css";
+
 const PostsList: React.FC = () => {
   const data: Queries.PostsListQuery = useStaticQuery(graphql`
     query PostsList {
@@ -33,17 +34,29 @@ const PostsList: React.FC = () => {
         const altText = post.featuredImage?.node.altText;
 
         return (
-          <Link to={post.uri ?? ""}>
-            <Box as="a" key={post.id} display="flex" flexDirection="column">
-              <Box as="div" className={thumbnailWrapperStyle}>
-                {gatsbyImage && (
-                  <GatsbyImage image={gatsbyImage} className={thumbnailStyle} alt={altText ?? post.title ?? ""} />
-                )}
-              </Box>
-              <Box as="h3">{post.title}</Box>
-              {post.excerpt && <Box as="div">{parse(post.excerpt)}</Box>}
+          <Box
+            as="a"
+            key={post.id}
+            display="flex"
+            href={post.uri ?? ""}
+            color="default"
+            flexDirection="column"
+            textDecorationLine="none"
+          >
+            <Box as="div" className={thumbnailWrapperStyle}>
+              {gatsbyImage && (
+                <GatsbyImage image={gatsbyImage} className={thumbnailStyle} alt={altText ?? post.title ?? ""} />
+              )}
             </Box>
-          </Link>
+            <Box as="h3" textDecorationLine="none">
+              {post.title}
+            </Box>
+            {post.excerpt && (
+              <Box as="div" textDecorationLine="none">
+                {parse(post.excerpt)}
+              </Box>
+            )}
+          </Box>
         );
       })}
     </Box>

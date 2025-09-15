@@ -30,7 +30,8 @@ export const typoProperties = defineProperties({
   properties: {
     fontFamily: themeVars.typography.fontFamily,
     whiteSpace: ['nowrap'],
-    color: themeVars.textColors
+    color: themeVars.textColors,
+    textDecorationLine: ['none', "underlined", "line-through"],
   },
 });
 

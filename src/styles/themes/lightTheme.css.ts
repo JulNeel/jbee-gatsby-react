@@ -7,8 +7,8 @@ export const lightTheme = createTheme(themeVars, {
   textColors: {
     default: globalVars.wpColors.primarydark,
     heading: globalVars.wpColors.primarydark,
-    link: globalVars.wpColors.primarydark,
-    linkHover: globalVars.wpColors.secondarydark,
+    link: globalVars.wpColors.primary,
+    linkHover: globalVars.wpColors.primarylight,
     secondary: globalVars.wpColors.secondarydark,
     success: globalVars.wpColors.success,
     danger: globalVars.wpColors.danger,
