@@ -5,7 +5,7 @@ import Header from "./Header";
 import { lightTheme } from "../styles/themes/lightTheme.css";
 import clsx from "clsx";
 import { Box } from "./Box";
-import { layoutStyle, mainStyle } from "./layout.css";
+import { layoutStyle } from "./layout.css";
 import Footer from "./Footer";
 
 interface LayoutProps {
@@ -45,7 +45,7 @@ const Layout: React.FC<LayoutProps> = ({ isHomePage, children }) => {
     <div className={clsx(lightTheme, layoutStyle, "layout")} id={`layout`} data-is-root-path={isHomePage}>
       <Header siteLogoData={siteLogoData} siteLogoAltText={siteLogoAltText}></Header>
 
-      <Box as={"main"} mb={"64"} className={clsx("content", mainStyle)}>
+      <Box as={"main"} mb={"64"} className={"content"}>
         {children}
       </Box>
       <Footer />
