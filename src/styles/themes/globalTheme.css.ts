@@ -19,8 +19,8 @@ export const globalVars = createGlobalTheme(":root", {
   wpFontSizes: {
     small: "1rem",
     medium: "1.2rem",
-    large: "2rem",
-    "x-large": "3rem",
+    large: "1.5rem",
+    "x-large": "2rem",
   },
   contentMaxWidth: {
     small: '800px',

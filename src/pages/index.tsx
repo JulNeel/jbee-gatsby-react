@@ -7,6 +7,7 @@ import { lightTheme } from "../styles/themes/lightTheme.css";
 import clsx from "clsx";
 import { SEO } from "../components/SEO";
 import { useSiteMetadata } from "../hooks/useSiteMetadata";
+import Footer from "../components/Footer";
 
 const App: React.FC<PageProps> = () => {
   React.useEffect(() => {
@@ -19,9 +20,10 @@ const App: React.FC<PageProps> = () => {
   return (
     <div className={clsx(lightTheme, "home")}>
       <HeaderHome></HeaderHome>
-      <Box as={"div"} className={"content"} py="32">
+      <Box as={"div"} className={"content"} height={"100vh"} py="32">
         <PostsList />
       </Box>
+      <Footer />
     </div>
   );
 };
