@@ -38,6 +38,8 @@ export const themeVars = createThemeContract({
     '16': null,
     '32': null,
     '64': null,
+    '128': null,
+    '256': null
   },
   typography: {
     fontFamily: {

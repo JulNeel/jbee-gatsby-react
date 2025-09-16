@@ -3,7 +3,7 @@ import { Box } from "./Box";
 
 const Footer: React.FC = () => {
   return (
-    <Box as="footer" padding={"64"} backgroundColor="primarydark" color="white">
+    <Box as="footer" py={"128"} px={"64"} backgroundColor="primarydark" color="white">
       © {new Date().getFullYear()}, Built with{" "}
       <Box as="a" color="white" href="https://www.gatsbyjs.com">
         Gatsby

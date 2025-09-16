@@ -1,7 +1,6 @@
 import { style } from "@vanilla-extract/css";
 import { breakpoints } from "../styles/breakpoints";
 import { themeVars } from "../styles/themes/themeContract.css";
-import { sprinkles } from "../styles/sprinkles.css";
 import { globalVars } from "../styles/themes/globalTheme.css";
 
 export const headerHomeStyle = style({

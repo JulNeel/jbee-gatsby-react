@@ -5,4 +5,7 @@ export const layoutStyle = style({
   flexDirection: "column",
   minHeight: "100vh",
 })
+export const mainStyle = style({
+  minHeight: "90vh",
+})
 
