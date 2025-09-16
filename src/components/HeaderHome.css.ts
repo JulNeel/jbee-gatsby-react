@@ -2,6 +2,7 @@ import { style } from "@vanilla-extract/css";
 import { breakpoints } from "../styles/breakpoints";
 import { themeVars } from "../styles/themes/themeContract.css";
 import { sprinkles } from "../styles/sprinkles.css";
+import { globalVars } from "../styles/themes/globalTheme.css";
 
 export const headerHomeStyle = style({
   width: "100%",
@@ -41,17 +42,24 @@ export const logoStyle = style({
 
 export const menuWrapperStyle = style({
   width: "100%",
-  boxShadow: "none",
+  //boxShadow: "none",
+  borderBottom: "none",
   transition: "all .5s ease-out",
   background: "none",
 })
 export const stickedMenuWrapperStyle = style({
-  position: "fixed",
-  top: 0,
-  background: themeVars.backgroundColor,
-  boxShadow: "0 1px 5px grey",
-  transition: "all .5s ease-out"
+  "@media": {
+    [breakpoints.smallDesktop]: {
+      position: "fixed",
+      top: 0,
+      background: themeVars.backgroundColor,
+      borderBottom: `5px solid ${globalVars.wpColors.secondary}`,
+
+      transition: "all .5s ease-out"
+    }
+  }
 })
+
 
 export const menuLogoStyle = style({
   display: "none",

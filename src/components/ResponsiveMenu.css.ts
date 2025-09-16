@@ -2,6 +2,7 @@ import { CSSProperties, style, createTheme } from "@vanilla-extract/css";
 import { breakpoints } from "../styles/breakpoints";
 import { globalVars } from "../styles/themes/globalTheme.css";
 import { themeVars } from "../styles/themes/themeContract.css";
+import { sprinkles } from "../styles/sprinkles.css";
 
 export const [whiteBackgroundMenu, localThemeVars] = createTheme({
   background: themeVars.backgroundColor,
@@ -107,18 +108,21 @@ export const hamburgerButton = style({
   alignItems: "center",
   backgroundColor: themeVars.buttonColors.secondary.background,
   left: 0,
-  boxShadow: "0 -1px 5px grey",
+  //boxShadow: "0 -1px 5px grey",
+  borderTop: `5px solid ${globalVars.wpColors.secondary}`,
   ':hover': {
     backgroundColor: themeVars.buttonColors.secondary.hoverBackground,
     color: themeVars.buttonColors.secondary.hoverText
   },
   '@media': {
-    [breakpoints.tablet]: {
+    [breakpoints.smallDesktop]: {
       position: "relative",
       width: "4rem",
       backgroundColor: globalVars.wpColors.white,
       marginLeft: "auto",
-      boxShadow: "none",
+      //boxShadow: "none",
+      borderBottom: "Opx",
+
       ':hover': {
         backgroundColor: themeVars.buttonColors.primary.hoverBackground,
       },
