@@ -108,8 +108,7 @@ export const hamburgerButton = style({
   alignItems: "center",
   backgroundColor: themeVars.buttonColors.secondary.background,
   left: 0,
-  //boxShadow: "0 -1px 5px grey",
-  borderTop: `5px solid ${globalVars.wpColors.secondary}`,
+  boxShadow: "0 -1px 5px grey",
   ':hover': {
     backgroundColor: themeVars.buttonColors.secondary.hoverBackground,
     color: themeVars.buttonColors.secondary.hoverText
@@ -120,8 +119,7 @@ export const hamburgerButton = style({
       width: "4rem",
       backgroundColor: globalVars.wpColors.white,
       marginLeft: "auto",
-      //boxShadow: "none",
-      borderBottom: "Opx",
+      boxShadow: "none",
 
       ':hover': {
         backgroundColor: themeVars.buttonColors.primary.hoverBackground,
