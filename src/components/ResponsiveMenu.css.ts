@@ -2,7 +2,6 @@ import { CSSProperties, style, createTheme } from "@vanilla-extract/css";
 import { breakpoints } from "../styles/breakpoints";
 import { globalVars } from "../styles/themes/globalTheme.css";
 import { themeVars } from "../styles/themes/themeContract.css";
-import { sprinkles } from "../styles/sprinkles.css";
 
 export const [whiteBackgroundMenu, localThemeVars] = createTheme({
   background: themeVars.backgroundColor,
