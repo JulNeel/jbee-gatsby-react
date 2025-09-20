@@ -23,7 +23,6 @@ const flexProperties = defineProperties({
     flexWrap: ["wrap", "nowrap", "wrap-reverse"],
     justifyContent: ["start", "end", "center", "space-between", "space-around"],
     alignItems: ["start", "end", "center", "baseline", "stretch"],
-    width: { full: '100%', auto: 'auto' },
   },
 })
 export const typoProperties = defineProperties({
@@ -42,8 +41,8 @@ export const responsiveProperties = defineProperties({
     smallDesktop: { '@media': breakpoints.smallDesktop },
     largeDesktop: { '@media': breakpoints.largeDesktop },
   },
-  responsiveArray: ['mobile', 'tablet', 'largeDesktop', 'smallDesktop'],
   defaultCondition: 'mobile',
+  responsiveArray: ['mobile', 'tablet', 'smallDesktop', 'largeDesktop'] as const,
   properties: {
     fontSize: themeVars.typography.fontSize,
     maxWidth: globalVars.contentMaxWidth,

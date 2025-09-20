@@ -67,7 +67,7 @@ const ResponsiveMenu: React.FC<ResponsiveMenuProps> = ({ menuItems, theme }) => 
               as="li"
               className={menuItemStyle}
               fontFamily="oswald"
-              fontSize={{ mobile: "xxLarge", tablet: "xxLarge", smallDesktop: "large", largeDesktop: "large" }}
+              fontSize={["xxLarge", "xxLarge", "large", "xLarge"]}
               key={menuItem.label}
             >
               <Link className={menuLinkStyle} to={menuItem.path ?? "#"}>
