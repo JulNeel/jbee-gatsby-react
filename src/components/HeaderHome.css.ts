@@ -1,7 +1,6 @@
 import { style } from "@vanilla-extract/css";
 import { breakpoints } from "../styles/breakpoints";
 import { themeVars } from "../styles/themes/themeContract.css";
-import { globalVars } from "../styles/themes/globalTheme.css";
 
 export const headerHomeStyle = style({
   width: "100%",
@@ -41,8 +40,7 @@ export const logoStyle = style({
 
 export const menuWrapperStyle = style({
   width: "100%",
-  //boxShadow: "none",
-  borderBottom: "none",
+  boxShadow: "none",
   transition: "all .5s ease-out",
   background: "none",
 })
@@ -52,8 +50,7 @@ export const stickedMenuWrapperStyle = style({
       position: "fixed",
       top: 0,
       background: themeVars.backgroundColor,
-      borderBottom: `5px solid ${globalVars.wpColors.secondary}`,
-
+      boxShadow: "0 1px 5px grey",
       transition: "all .5s ease-out"
     }
   }
