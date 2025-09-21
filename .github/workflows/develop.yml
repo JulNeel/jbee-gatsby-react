@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - "develop"
+  workflow_dispatch:
 jobs:
   web-deploy-on-develop:
     name: Deploy on develop
