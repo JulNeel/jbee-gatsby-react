@@ -4,10 +4,10 @@ import { GatsbyImage, getImage, ImageDataLike } from "gatsby-plugin-image";
 import parse from "html-react-parser";
 import Layout from "../components/Layout";
 import { SEO } from "../components/SEO";
-
 import { useSiteMetadata } from "../hooks/useSiteMetadata";
 import { Box } from "../components/Box";
 import { blogPostNavItemStyle, blogPostNavStyle } from "./post.css";
+import Giscus from "../components/Giscus";
 
 const PostTemplate: React.FC<PageProps<Queries.PostByIdQuery>> = ({
   data: { previousPost, nextPost, currentPost, currentPostHtml },
@@ -47,6 +47,7 @@ const PostTemplate: React.FC<PageProps<Queries.PostByIdQuery>> = ({
 
         <Box as={"hr"} my={"64"} />
       </article>
+      <Giscus />
 
       <nav>
         <Box as={"ul"} fontSize={"small"} className={blogPostNavStyle}>
