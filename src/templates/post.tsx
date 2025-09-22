@@ -44,10 +44,10 @@ const PostTemplate: React.FC<PageProps<Queries.PostByIdQuery>> = ({
         </header>
 
         {!!currentPostHtml?.html && <section itemProp="articleBody">{parse(currentPostHtml?.html)}</section>}
-
+        <Box as={"h2"}>Commentaires</Box>
+        <Giscus />
         <Box as={"hr"} my={"64"} />
       </article>
-      <Giscus />
 
       <nav>
         <Box as={"ul"} fontSize={"small"} className={blogPostNavStyle}>
