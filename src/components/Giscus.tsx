@@ -11,8 +11,8 @@ const Giscus: React.FC = () => {
 
     script.setAttribute("data-repo", "JulNeel/jbee-gatsby-react");
     script.setAttribute("data-repo-id", "R_kgDOOv1PGw");
-    script.setAttribute("data-category", "General");
-    script.setAttribute("data-category-id", "DIC_kwDOOv1PG84Cvtzf");
+    script.setAttribute("data-category", "JBEE comments");
+    script.setAttribute("data-category-id", "DIC_kwDOOv1PG84CvwyS");
     script.setAttribute("data-mapping", "og:title");
     script.setAttribute("data-reactions-enabled", "1");
     script.setAttribute("data-emit-metadata", "0");
