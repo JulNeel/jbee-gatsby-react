@@ -20,7 +20,7 @@ const App: React.FC<PageProps> = () => {
   return (
     <div className={clsx(lightTheme, "home")}>
       <HeaderHome></HeaderHome>
-      <Box as={"div"} className={"content"} height={"100vh"} py="32">
+      <Box role="main" as={"div"} className={"content"} height={"100vh"} py="32">
         <PostsList />
       </Box>
       <Footer />

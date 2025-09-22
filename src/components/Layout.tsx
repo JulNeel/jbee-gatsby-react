@@ -45,7 +45,7 @@ const Layout: React.FC<LayoutProps> = ({ isHomePage, children }) => {
     <div className={clsx(lightTheme, layoutStyle, "layout")} id={`layout`} data-is-root-path={isHomePage}>
       <Header siteLogoData={siteLogoData} siteLogoAltText={siteLogoAltText}></Header>
 
-      <Box as={"main"} mb={"64"} className={clsx("content", mainStyle)}>
+      <Box as={"main"} role="main" mb={"64"} className={clsx("content", mainStyle)}>
         {children}
       </Box>
       <Footer />
