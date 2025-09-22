@@ -14,7 +14,7 @@ const Giscus: React.FC = () => {
     script.setAttribute("data-category", "JBEE comments");
     script.setAttribute("data-category-id", "DIC_kwDOOv1PG84CvwyS");
     script.setAttribute("data-mapping", "og:title");
-    script.setAttribute("data-reactions-enabled", "1");
+    script.setAttribute("data-reactions-enabled", "0");
     script.setAttribute("data-emit-metadata", "0");
     script.setAttribute("data-theme", "light");
     script.setAttribute("data-lang", "fr");
