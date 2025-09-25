@@ -3,8 +3,6 @@ import { Link, PageProps, HeadProps, graphql } from "gatsby";
 import { GatsbyImage, getImage, ImageDataLike } from "gatsby-plugin-image";
 import parse from "html-react-parser";
 import Layout from "../components/Layout";
-import { SEO } from "../components/SEO";
-import { useSiteMetadata } from "../hooks/useSiteMetadata";
 import { Box } from "../components/Box";
 import { blogPostNavItemStyle, blogPostNavStyle } from "./post.css";
 import Giscus from "../components/Giscus";
@@ -12,7 +10,7 @@ import Giscus from "../components/Giscus";
 const PostTemplate: React.FC<PageProps<Queries.PostByIdQuery>> = ({
   data: { previousPost, nextPost, currentPost, currentPostHtml },
 }) => {
-  const authorName = currentPost?.author?.node.name || useSiteMetadata().author;
+  const authorName = currentPost?.author?.node.name;
   const imageData = currentPost?.featuredImage?.node?.localFile
     ? getImage(currentPost.featuredImage.node.localFile as ImageDataLike)
     : undefined;
@@ -22,18 +20,10 @@ const PostTemplate: React.FC<PageProps<Queries.PostByIdQuery>> = ({
       <article itemScope itemType="http://schema.org/BlogPosting">
         <header>
           <h1 itemProp="headline">{parse(currentPost?.title ?? "")}</h1>
-          <Box
-            as="div"
-            className="blog-post-meta"
-            display="flex"
-            justifyContent="space-between"
-            mb={"8"}
-            backgroundColor="primary"
-            padding={"8"}
-            color="white"
-          >
-            <span>par {authorName}</span>
-            <span>{currentPost?.date}</span>
+          <Box as="div" className="blog-post-meta" display="flex" justifyContent="space-between" mb={"8"} padding={"8"}>
+            <Box as="span" ml="auto">
+              {currentPost?.date}
+            </Box>
           </Box>
           {imageData && (
             <GatsbyImage
@@ -103,6 +93,7 @@ export const postQuery = graphql`
         metaDesc
         opengraphTitle
         opengraphDescription
+        fullHead
         metaRobotsNoindex
         metaRobotsNofollow
       }
@@ -132,84 +123,14 @@ export const postQuery = graphql`
   }
 `;
 
-// HEAD COMPONENT FOR SEO
 export const Head: React.FC<HeadProps<Queries.PostByIdQuery>> = ({ data }) => {
-  const { currentPost, site } = data;
-
-  if (!currentPost || !currentPost.seo) return null;
-
-  const {
-    title: defaultTitle,
-    description: defaultDescription,
-    author: defaultAuthor,
-    siteUrl,
-    siteLogoUrl,
-  } = useSiteMetadata();
-
-  const seoTitle = currentPost.seo.title ?? currentPost.title ?? defaultTitle;
-  const seoDescription = currentPost.seo.metaDesc ?? currentPost.excerpt ?? defaultDescription;
-  const image = currentPost.featuredImage?.node?.sourceUrl ?? undefined;
-  const url = `${siteUrl}${currentPost.uri}`;
-  const authorName = currentPost.author?.node.name ?? defaultAuthor;
-
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "BlogPosting",
-        headline: seoTitle,
-        description: seoDescription,
-        author: {
-          "@type": "Person",
-          name: authorName,
-        },
-        datePublished: currentPost.date,
-        dateModified: currentPost.modified ?? currentPost.date,
-        mainEntityOfPage: {
-          "@type": "WebPage",
-          "@id": url,
-        },
-        ...(image && {
-          image: {
-            "@type": "ImageObject",
-            url: image,
-          },
-        }),
-        publisher: {
-          "@type": "Organization",
-          name: site?.siteMetadata?.title ?? defaultTitle,
-          logo: {
-            "@type": "ImageObject",
-            url: siteLogoUrl,
-          },
-        },
-      },
-      {
-        "@type": "WebPage",
-        "@id": url,
-        url,
-        name: seoTitle,
-        description: seoDescription,
-        isPartOf: {
-          "@type": "WebSite",
-          url: siteUrl,
-          name: site?.siteMetadata?.title ?? defaultTitle,
-        },
-      },
-    ],
-  };
+  if (!data.currentPost?.seo?.fullHead) return null;
 
   return (
-    <SEO
-      title={seoTitle}
-      description={seoDescription}
-      image={image}
-      url={url}
-      type="article"
-      canonical={url}
-      jsonLd={jsonLd}
-      noindex={currentPost.seo.metaRobotsNoindex === "noindex"}
-      nofollow={currentPost.seo.metaRobotsNofollow === "nofollow"}
+    <div
+      dangerouslySetInnerHTML={{
+        __html: data.currentPost.seo.fullHead,
+      }}
     />
   );
 };
