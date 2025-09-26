@@ -32,7 +32,7 @@ export default App;
 
 // HEAD COMPONENT FOR SEO
 export const Head: React.FC = () => {
-  const { title: siteTitle, description: siteDescription, url: siteUrl, siteLogoUrl } = useSeoMetadata();
+  const { title: siteTitle, description: siteDescription, siteUrl, siteLogoUrl } = useSeoMetadata();
 
   const jsonLd = {
     "@context": "https://schema.org",
