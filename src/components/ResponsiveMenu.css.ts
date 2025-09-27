@@ -116,7 +116,7 @@ export const hamburgerButton = style({
     [breakpoints.smallDesktop]: {
       position: "relative",
       width: "4rem",
-      backgroundColor: globalVars.wpColors.white,
+      backgroundColor: globalVars.wpColors.offwhite,
       marginLeft: "auto",
       boxShadow: "none",
 

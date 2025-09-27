@@ -3,7 +3,7 @@ import { globalVars } from './globalTheme.css';
 import { themeVars } from './themeContract.css'
 
 export const lightTheme = createTheme(themeVars, {
-  backgroundColor: globalVars.wpColors.white,
+  backgroundColor: globalVars.wpColors.offwhite,
   textColors: {
     default: globalVars.wpColors.primarydark,
     heading: globalVars.wpColors.primarydark,
@@ -13,21 +13,21 @@ export const lightTheme = createTheme(themeVars, {
     success: globalVars.wpColors.success,
     danger: globalVars.wpColors.danger,
     warning: globalVars.wpColors.warning,
-    white: globalVars.wpColors.white,
-    black: globalVars.wpColors.black
+    white: globalVars.wpColors.offwhite,
+    black: globalVars.wpColors.offblack
   },
   buttonColors: {
     primary: {
       background: globalVars.wpColors.primarydark,
-      text: globalVars.wpColors.white,
+      text: globalVars.wpColors.offwhite,
       hoverBackground: globalVars.wpColors.primary,
-      hoverText: globalVars.wpColors.white
+      hoverText: globalVars.wpColors.offwhite
     },
     secondary: {
-      background: globalVars.wpColors.white,
+      background: globalVars.wpColors.offwhite,
       text: globalVars.wpColors.primarydark,
       hoverBackground: globalVars.wpColors.primary,
-      hoverText: globalVars.wpColors.white
+      hoverText: globalVars.wpColors.offwhite
     },
   },
   spaces: {

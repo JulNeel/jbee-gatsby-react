@@ -1,9 +1,10 @@
 import * as React from "react";
-import { graphql, useStaticQuery } from "gatsby";
+
+import { useSeoMetadata } from "../hooks/useSeoMetadata";
 
 type SeoProps = {
-  title?: string;
-  description?: string;
+  title: string;
+  description: string;
   image?: string;
   url?: string;
   type?: "website" | "article" | "profile";
@@ -11,98 +12,61 @@ type SeoProps = {
   jsonLd?: Record<string, any>;
   noindex?: boolean;
   nofollow?: boolean;
-  twitterUsername?: string;
 };
-
-export const SEO: React.FC<SeoProps> = ({
-  title,
-  description,
-  image,
-  url,
-  type = "website",
-  canonical,
-  jsonLd,
-  noindex = false,
-  nofollow = false,
-  twitterUsername,
-}) => {
-  const { wp } = useStaticQuery(graphql`
-    query DefaultSeoQuery {
-      wp {
-        generalSettings {
-          title
-          description
-          url
-        }
-        siteFavicon {
-          sourceUrl
-        }
-        seo {
-          social {
-            twitter {
-              username
-            }
-          }
-        }
-      }
-    }
-  `);
-
-  const defaults = {
-    title: wp.generalSettings?.title,
-    description: wp.generalSettings?.description,
-    siteUrl: wp.generalSettings?.url,
-    twitter: wp.seo?.social?.twitter?.username,
-    favicon: wp.siteFavicon?.sourceUrl,
+export const SEO: React.FC<SeoProps> = (seo) => {
+  const { siteUrl, siteFaviconUrl, twitterUsername } = useSeoMetadata();
+  const headerSeoProps = {
+    title: seo.title,
+    description: seo.description,
+    image: seo.image,
+    url: siteUrl,
+    canonical: seo.canonical ?? siteUrl,
+    twitterUsername: twitterUsername,
+    noindex: seo.noindex,
+    nofollow: seo.nofollow,
+    favicon: siteFaviconUrl,
+    jsonLd: seo.jsonLd,
+    type: seo.type ?? "website",
   };
-
-  const seo = {
-    title: title || defaults.title,
-    description: description || defaults.description,
-    image: image ? `${defaults.siteUrl}${image}` : undefined,
-    url: url || defaults.siteUrl,
-    canonical: canonical || url || defaults.siteUrl,
-    twitterUsername: twitterUsername || defaults.twitter,
-  };
-
-  const robots = `${noindex ? "noindex" : "index"}, ${nofollow ? "nofollow" : "follow"}`;
-
+  const robots = `${seo.noindex ? "noindex" : "index"}, ${seo.nofollow ? "nofollow" : "follow"}`;
   return (
     <>
       {/* Title & Meta Description */}
-      <title>{seo.title}</title>
-      {seo.description && <meta name="description" content={seo.description} />}
+      <title>{headerSeoProps.title}</title>
+      {headerSeoProps.description && <meta name="description" content={headerSeoProps.description} />}
       <meta name="robots" content={robots} />
 
       {/* Favicon depuis WordPress */}
-      {defaults.favicon && (
+      {headerSeoProps.favicon && (
         <>
-          <link rel="icon" href={defaults.favicon} sizes="32x32" />
-          <link rel="icon" href={defaults.favicon} sizes="192x192" />
-          <link rel="apple-touch-icon" href={defaults.favicon} />
-          <meta name="msapplication-TileImage" content={defaults.favicon} />
+          <link rel="icon" href={headerSeoProps.favicon} sizes="32x32" />
+          <link rel="icon" href={headerSeoProps.favicon} sizes="192x192" />
+          <link rel="apple-touch-icon" href={headerSeoProps.favicon} />
+          <meta name="msapplication-TileImage" content={headerSeoProps.favicon} />
         </>
       )}
 
       {/* Open Graph */}
-      <meta property="og:type" content={type} />
-      <meta property="og:url" content={seo.url} />
-      <meta property="og:title" content={seo.title} />
-      {seo.description && <meta property="og:description" content={seo.description} />}
-      {seo.image && <meta property="og:image" content={seo.image} />}
+      <meta property="og:type" content={headerSeoProps.type} />
+      <meta property="og:url" content={headerSeoProps.url} />
+      <meta property="og:title" content={headerSeoProps.title} />
+      {headerSeoProps.description && <meta property="og:description" content={headerSeoProps.description} />}
+      {headerSeoProps.image && <meta property="og:image" content={headerSeoProps.image} />}
 
       {/* Twitter */}
       <meta name="twitter:card" content="summary_large_image" />
-      {seo.twitterUsername && <meta name="twitter:site" content={`@${seo.twitterUsername}`} />}
-      <meta name="twitter:title" content={seo.title} />
-      {seo.description && <meta name="twitter:description" content={seo.description} />}
-      {seo.image && <meta name="twitter:image" content={seo.image} />}
+      {headerSeoProps.twitterUsername && <meta name="twitter:site" content={`@${headerSeoProps.twitterUsername}`} />}
+      <meta name="twitter:title" content={headerSeoProps.title} />
+      {headerSeoProps.description && <meta name="twitter:description" content={headerSeoProps.description} />}
+      {headerSeoProps.image && <meta name="twitter:image" content={headerSeoProps.image} />}
 
       {/* Canonical */}
-      {seo.canonical && <link rel="canonical" href={seo.canonical} />}
+      {headerSeoProps.canonical && <link rel="canonical" href={headerSeoProps.canonical} />}
 
       {/* JSON-LD */}
-      {jsonLd && <script type="application/ld+json">{JSON.stringify(jsonLd).replace(/</g, "\\u003c")}</script>}
+      {headerSeoProps.jsonLd && (
+        <script type="application/ld+json">{JSON.stringify(headerSeoProps.jsonLd).replace(/</g, "\\u003c")}</script>
+      )}
     </>
   );
 };

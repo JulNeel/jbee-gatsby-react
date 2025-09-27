@@ -1,4 +1,4 @@
-import { HeadProps, PageProps } from "gatsby";
+import { PageProps } from "gatsby";
 import * as React from "react";
 import HeaderHome from "../components/HeaderHome";
 import PostsList from "../components/PostsList";
@@ -6,8 +6,8 @@ import { Box } from "../components/Box";
 import { lightTheme } from "../styles/themes/lightTheme.css";
 import clsx from "clsx";
 import { SEO } from "../components/SEO";
-import { useSiteMetadata } from "../hooks/useSiteMetadata";
 import Footer from "../components/Footer";
+import { useSeoMetadata } from "../hooks/useSeoMetadata";
 
 const App: React.FC<PageProps> = () => {
   React.useEffect(() => {
@@ -20,7 +20,7 @@ const App: React.FC<PageProps> = () => {
   return (
     <div className={clsx(lightTheme, "home")}>
       <HeaderHome></HeaderHome>
-      <Box as={"div"} className={"content"} height={"100vh"} py="32">
+      <Box role="main" as={"div"} className={"content"} height={"100vh"} py="32">
         <PostsList />
       </Box>
       <Footer />
@@ -32,7 +32,7 @@ export default App;
 
 // HEAD COMPONENT FOR SEO
 export const Head: React.FC = () => {
-  const { title: defaultTitle, description: defaultDescription, siteUrl, siteLogoUrl } = useSiteMetadata();
+  const { title: siteTitle, description: siteDescription, siteUrl, siteLogoUrl } = useSeoMetadata();
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -41,11 +41,11 @@ export const Head: React.FC = () => {
         "@type": "WebSite",
         "@id": `${siteUrl}#website`,
         url: siteUrl,
-        name: defaultTitle,
-        description: defaultDescription,
+        name: siteTitle,
+        description: siteDescription,
         publisher: {
           "@type": "Organization",
-          name: defaultTitle,
+          name: siteTitle,
           logo: {
             "@type": "ImageObject",
             url: siteLogoUrl,
@@ -61,8 +61,8 @@ export const Head: React.FC = () => {
         "@type": "WebPage",
         "@id": `${siteUrl}#webpage`,
         url: siteUrl,
-        name: defaultTitle,
-        description: defaultDescription,
+        name: siteTitle,
+        description: siteDescription,
         isPartOf: {
           "@id": `${siteUrl}#website`,
         },
@@ -72,8 +72,8 @@ export const Head: React.FC = () => {
 
   return (
     <SEO
-      title={defaultTitle}
-      description={defaultDescription}
+      title={siteTitle}
+      description={siteDescription}
       url={siteUrl}
       type="website"
       canonical={siteUrl}
