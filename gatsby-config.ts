@@ -38,7 +38,12 @@ const config: GatsbyConfig = {
     },
 
 
-    `gatsby-plugin-image`,
+    {
+      resolve: `gatsby-plugin-image`,
+      options: {
+        loading: "eager",
+      },
+    },
     `gatsby-plugin-sharp`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-vanilla-extract`,

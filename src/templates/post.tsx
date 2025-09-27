@@ -10,7 +10,6 @@ import Giscus from "../components/Giscus";
 const PostTemplate: React.FC<PageProps<Queries.PostByIdQuery>> = ({
   data: { previousPost, nextPost, currentPost, currentPostHtml },
 }) => {
-  const authorName = currentPost?.author?.node.name;
   const imageData = currentPost?.featuredImage?.node?.localFile
     ? getImage(currentPost.featuredImage.node.localFile as ImageDataLike)
     : undefined;
@@ -127,10 +126,13 @@ export const Head: React.FC<HeadProps<Queries.PostByIdQuery>> = ({ data }) => {
   if (!data.currentPost?.seo?.fullHead) return null;
 
   return (
-    <div
-      dangerouslySetInnerHTML={{
-        __html: data.currentPost.seo.fullHead,
-      }}
-    />
+    <>
+      <html lang="fr" />
+      <div
+        dangerouslySetInnerHTML={{
+          __html: data.currentPost.seo.fullHead,
+        }}
+      />
+    </>
   );
 };

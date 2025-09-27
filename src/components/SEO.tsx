@@ -31,6 +31,7 @@ export const SEO: React.FC<SeoProps> = (seo) => {
   const robots = `${seo.noindex ? "noindex" : "index"}, ${seo.nofollow ? "nofollow" : "follow"}`;
   return (
     <>
+      <html lang="fr" />
       {/* Title & Meta Description */}
       <title>{headerSeoProps.title}</title>
       {headerSeoProps.description && <meta name="description" content={headerSeoProps.description} />}
