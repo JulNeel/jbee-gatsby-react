@@ -38,7 +38,12 @@ const config: GatsbyConfig = {
     },
 
 
-    `gatsby-plugin-image`,
+    {
+      resolve: `gatsby-plugin-image`,
+      options: {
+        loading: "eager",
+      },
+    },
     `gatsby-plugin-sharp`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-vanilla-extract`,
@@ -48,7 +53,7 @@ const config: GatsbyConfig = {
       resolve: 'gatsby-source-filesystem',
       options: {
         name: 'images',
-        path: './src/assets/images',
+        path: './static/images',
       },
       __key: 'images',
     },

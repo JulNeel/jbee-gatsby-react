@@ -1,6 +1,6 @@
 import { graphql, Link, useStaticQuery } from "gatsby";
 import React, { useRef } from "react";
-import logo from "../assets/images/logo_jbee_dev_800_blanc.png";
+import logo from "../../static/images/logo_jbee_dev_800_blanc.png";
 import { Box } from "./Box";
 import ResponsiveMenu from "./ResponsiveMenu";
 import { useIsElementAtInitialPosition } from "../hooks/useIsElementAtInitialPosition";

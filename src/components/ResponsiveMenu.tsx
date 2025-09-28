@@ -58,7 +58,6 @@ const ResponsiveMenu: React.FC<ResponsiveMenuProps> = ({ menuItems, theme }) => 
           { [transparentBackgroundMenu]: theme === "transparentBackgroundMenu" },
           { [navMenuOpened]: isMenuOpened }
         )}
-        aria-hidden={!isMenuOpened}
       >
         <Box as="ul" className={menuItemsStyle}>
           {menuItems.map((menuItem) => (

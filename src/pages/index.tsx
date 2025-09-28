@@ -13,7 +13,9 @@ const App: React.FC<PageProps> = () => {
   React.useEffect(() => {
     if (typeof window !== "undefined") {
       import("jarallax").then(({ jarallax }) => {
-        jarallax(document.querySelectorAll(".jarallax"), {});
+        jarallax(document.querySelectorAll(".jarallax"), {
+          disableParallax: /iPad|iPhone|iPod|Android/,
+        });
       });
     }
   }, []);
@@ -43,26 +45,34 @@ export const Head: React.FC = () => {
         url: siteUrl,
         name: siteTitle,
         description: siteDescription,
+        inLanguage: "fr",
         publisher: {
           "@type": "Organization",
           name: siteTitle,
+          url: siteUrl,
           logo: {
             "@type": "ImageObject",
             url: siteLogoUrl,
           },
+          sameAs: [
+            "https://www.facebook.com/jbee.dev",
+            "https://www.linkedin.com/in/julienbruneel/",
+            "https://github.com/JulNeel",
+          ],
         },
-        potentialAction: {
-          "@type": "SearchAction",
-          target: `${siteUrl}/?s={search_term_string}`,
-          "query-input": "required name=search_term_string",
-        },
+        // potentialAction: {
+        //   "@type": "SearchAction",
+        //   target: `${siteUrl}/?s={search_term_string}`,
+        //   "query-input": "required name=search_term_string",
+        // },
       },
       {
-        "@type": "WebPage",
+        "@type": "CollectionPage",
         "@id": `${siteUrl}#webpage`,
         url: siteUrl,
         name: siteTitle,
         description: siteDescription,
+        inLanguage: "fr",
         isPartOf: {
           "@id": `${siteUrl}#website`,
         },
