@@ -13,9 +13,7 @@ const App: React.FC<PageProps> = () => {
   React.useEffect(() => {
     if (typeof window !== "undefined") {
       import("jarallax").then(({ jarallax }) => {
-        jarallax(document.querySelectorAll(".jarallax"), {
-          disableParallax: /iPad|iPhone|iPod|Android/,
-        });
+        jarallax(document.querySelectorAll(".jarallax"), {});
       });
     }
   }, []);
