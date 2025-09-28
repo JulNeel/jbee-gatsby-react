@@ -23,7 +23,7 @@ const App: React.FC<PageProps> = () => {
       .then(({ jarallax }) => {
         const elements = document.querySelectorAll(".jarallax");
         if (elements.length) {
-          jarallax(elements, {}); // initialisation
+          jarallax(elements, {});
         }
       })
       .catch((err) => console.error("Erreur lors du chargement de Jarallax :", err));
