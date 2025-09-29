@@ -38,9 +38,6 @@ const config: GatsbyConfig = {
 
     {
       resolve: `gatsby-plugin-image`,
-      options: {
-        loading: "eager",
-      },
     },
     `gatsby-plugin-sharp`,
     `gatsby-transformer-sharp`,

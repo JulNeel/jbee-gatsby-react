@@ -47,7 +47,7 @@ export const lightTheme = createTheme(themeVars, {
     fontFamily: {
       heading: "Oswald",
       menu: "Oswald",
-      body: "Oswald",
+      body: "Roboto",
       paragraph: "Roboto",
       oswald: "Oswald",
       roboto: "Roboto",

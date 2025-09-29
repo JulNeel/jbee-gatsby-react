@@ -35,7 +35,8 @@ export const logoWrapperStyle = style({
 
 export const logoStyle = style({
   maxWidth: "95vw",
-  width: "500px"
+  width: "500px",
+  height: "auto",
 });
 
 export const menuWrapperStyle = style({

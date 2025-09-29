@@ -37,7 +37,11 @@ const Header: React.FC<HeaderProps> = ({ siteLogoData, siteLogoAltText }) => {
     <Box as="header" className={clsx(headerStyle, { [scrolledHeaderStyle]: isScrolled })}>
       <Box as="div" className={clsx("content", headerContentStyle)}>
         <Link to="/" className={clsx(logoStyle, { [scrolledLogoStyle]: isScrolled })}>
-          {siteLogoData ? <GatsbyImage image={siteLogoData} alt={siteLogoAltText} /> : <p>Logo non disponible</p>}
+          {siteLogoData ? (
+            <GatsbyImage image={siteLogoData} alt={siteLogoAltText} loading="eager" fetchPriority="high" />
+          ) : (
+            <p>Logo non disponible</p>
+          )}
         </Link>
         <ResponsiveMenu theme="whiteBackgroundMenu" menuItems={menuItems} />
       </Box>

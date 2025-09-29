@@ -36,7 +36,7 @@ export default function Header(): JSX.Element {
             sourceUrl
             localFile {
               childImageSharp {
-                gatsbyImageData(placeholder: NONE)
+                gatsbyImageData(placeholder: DOMINANT_COLOR)
               }
             }
           }
@@ -80,6 +80,8 @@ export default function Header(): JSX.Element {
       {headerImageData && (
         <GatsbyImage
           image={headerImageData}
+          loading="eager"
+          fetchPriority="high"
           alt="Background"
           className="jarallax-img"
           style={{ height: "100%", width: "100%" }}
@@ -106,7 +108,11 @@ export default function Header(): JSX.Element {
               [stickedMenuLogoStyle]: isMenuAtInitialPosition,
             })}
           >
-            {siteLogoData ? <GatsbyImage image={siteLogoData} alt={siteLogoAltText} /> : <p>Logo non disponible</p>}
+            {siteLogoData ? (
+              <GatsbyImage image={siteLogoData} alt={siteLogoAltText} loading="eager" fetchPriority="high" />
+            ) : (
+              <p>Logo non disponible</p>
+            )}
           </Link>
 
           <ResponsiveMenu

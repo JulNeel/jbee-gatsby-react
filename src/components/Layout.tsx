@@ -28,7 +28,7 @@ const Layout: React.FC<LayoutProps> = ({ isHomePage, children }) => {
           sourceUrl
           localFile {
             childImageSharp {
-              gatsbyImageData(placeholder: NONE)
+              gatsbyImageData(placeholder: BLURRED)
             }
           }
         }
