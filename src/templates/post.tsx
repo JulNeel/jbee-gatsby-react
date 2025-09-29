@@ -10,7 +10,7 @@ import { useSeoMetadata } from "../hooks/useSeoMetadata";
 import { sanitizeYoastHead } from "../utils/sanitizeYoastHead";
 
 const PostTemplate: React.FC<PageProps<Queries.PostByIdQuery>> = ({
-  data: { previousPost, nextPost, currentPost },
+  data: { previousPost, nextPost, currentPost, currentPostHtml },
 }) => {
   const imageData = currentPost?.featuredImage?.node?.localFile
     ? getImage(currentPost.featuredImage.node.localFile as ImageDataLike)
@@ -35,7 +35,7 @@ const PostTemplate: React.FC<PageProps<Queries.PostByIdQuery>> = ({
             />
           )}
         </header>
-        {!!currentPost?.content && <section itemProp="articleBody">{parse(currentPost.content)}</section>}
+        {!!currentPostHtml?.html && <section itemProp="articleBody">{parse(currentPostHtml.html)}</section>}
 
         <Box as={"h2"}>Commentaires</Box>
         <Giscus />
@@ -70,7 +70,6 @@ export const postQuery = graphql`
   query PostById($id: String!, $previousPostId: String, $nextPostId: String) {
     currentPost: wpPost(id: { eq: $id }) {
       title
-      content
       date(formatString: "DD MMMM YYYY", locale: "fr")
       uri
       featuredImage {
@@ -93,7 +92,9 @@ export const postQuery = graphql`
         metaRobotsNofollow
       }
     }
-
+    currentPostHtml: htmlRehype(parent: { id: { eq: $id } }) {
+      html
+    }
     previousPost: wpPost(id: { eq: $previousPostId }) {
       uri
       title

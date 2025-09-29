@@ -60,16 +60,17 @@ globalStyle('.wp-element-caption', {
 
 })
 globalStyle('a', {
-
   color: themeVars.textColors.link,
   textDecoration: "underline",
-
 })
 
 globalStyle('a:hover', {
   color: themeVars.textColors.linkHover,
 })
 
+globalStyle('code', {
+  wordBreak: 'break-all',
+})
 
 globalStyle('.content', ({
   maxWidth: globalVars.contentMaxWidth.small,
