@@ -38,7 +38,7 @@ const Header: React.FC<HeaderProps> = ({ siteLogoData, siteLogoAltText }) => {
       <Box as="div" className={clsx("content", headerContentStyle)}>
         <Link to="/" className={clsx(logoStyle, { [scrolledLogoStyle]: isScrolled })}>
           {siteLogoData ? (
-            <GatsbyImage image={siteLogoData} alt={siteLogoAltText} loading="eager" fetchPriority="high" />
+            <GatsbyImage image={siteLogoData} alt={siteLogoAltText} loading="eager" />
           ) : (
             <p>Logo non disponible</p>
           )}

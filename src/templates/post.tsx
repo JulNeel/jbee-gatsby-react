@@ -31,7 +31,6 @@ const PostTemplate: React.FC<PageProps<Queries.PostByIdQuery>> = ({
               image={imageData}
               alt={currentPost?.featuredImage?.node?.altText || currentPost?.title || ""}
               loading="eager"
-              fetchPriority="high"
             />
           )}
         </header>
