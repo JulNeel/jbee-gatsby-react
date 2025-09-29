@@ -81,10 +81,8 @@ export default function Header(): JSX.Element {
         <GatsbyImage
           image={headerImageData}
           loading="eager"
-          fetchPriority="high"
           alt="Background"
           className="jarallax-img"
-          style={{ height: "100%", width: "100%" }}
           objectFit="cover"
           objectPosition="center"
         />
