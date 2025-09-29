@@ -108,11 +108,7 @@ export default function Header(): JSX.Element {
               [stickedMenuLogoStyle]: isMenuAtInitialPosition,
             })}
           >
-            {siteLogoData ? (
-              <GatsbyImage image={siteLogoData} alt={siteLogoAltText} loading="eager" fetchPriority="high" />
-            ) : (
-              <p>Logo non disponible</p>
-            )}
+            {siteLogoData ? <GatsbyImage image={siteLogoData} alt={siteLogoAltText} /> : <p>Logo non disponible</p>}
           </Link>
 
           <ResponsiveMenu
