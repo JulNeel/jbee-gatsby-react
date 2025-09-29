@@ -57,7 +57,6 @@ export default function Header(): JSX.Element {
   const menuRef = useRef<HTMLDivElement>(null);
   const isMenuAtInitialPosition = useIsElementAtInitialPosition(menuRef);
 
-  // Image header responsive via gatsby-plugin-image
   const headerImageData = data.wp?.siteHeaderImage?.localFile?.childImageSharp
     ? getImage(data.wp.siteHeaderImage.localFile as ImageDataLike)
     : null;
@@ -81,6 +80,7 @@ export default function Header(): JSX.Element {
         <GatsbyImage
           image={headerImageData}
           loading="eager"
+          fetchPriority="high"
           alt="Background"
           className="jarallax-img"
           objectFit="cover"
