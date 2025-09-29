@@ -4,8 +4,7 @@ const config: GatsbyConfig = {
   siteMetadata: {
     title: 'Julien Bruneel, développeur web',
     author: 'Julien Bruneel',
-    siteUrl: `https://julienbruneel.fr/`,
-    description: "Un site statique rapide avec Gatsby",
+    siteUrl: `https://julienbruneel.fr`,
   },
   graphqlTypegen: true,
   plugins: [
@@ -37,17 +36,12 @@ const config: GatsbyConfig = {
       },
     },
 
-
     {
       resolve: `gatsby-plugin-image`,
-      options: {
-        loading: "eager",
-      },
     },
     `gatsby-plugin-sharp`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-vanilla-extract`,
-    `gatsby-plugin-sitemap`,
     `gatsby-plugin-wpgraphql-seo`,
     {
       resolve: 'gatsby-source-filesystem',
@@ -57,6 +51,7 @@ const config: GatsbyConfig = {
       },
       __key: 'images',
     },
+    `gatsby-plugin-sitemap`,
   ],
 };
 

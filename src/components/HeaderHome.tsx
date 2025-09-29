@@ -25,9 +25,8 @@ export default function Header(): JSX.Element {
           siteHeaderImage {
             localFile {
               childImageSharp {
-                gatsbyImageData(placeholder: DOMINANT_COLOR)
+                gatsbyImageData(layout: FULL_WIDTH, placeholder: BLURRED, formats: [AUTO, WEBP, AVIF])
               }
-              url
             }
           }
           siteLogo {
@@ -37,7 +36,7 @@ export default function Header(): JSX.Element {
             sourceUrl
             localFile {
               childImageSharp {
-                gatsbyImageData(placeholder: NONE)
+                gatsbyImageData(placeholder: DOMINANT_COLOR)
               }
             }
           }
@@ -54,9 +53,15 @@ export default function Header(): JSX.Element {
       }
     `
   );
+
   const menuRef = useRef<HTMLDivElement>(null);
   const isMenuAtInitialPosition = useIsElementAtInitialPosition(menuRef);
-  const headerImage = data.wp?.siteHeaderImage?.localFile?.url ?? "";
+
+  // Image header responsive via gatsby-plugin-image
+  const headerImageData = data.wp?.siteHeaderImage?.localFile?.childImageSharp
+    ? getImage(data.wp.siteHeaderImage.localFile as ImageDataLike)
+    : null;
+
   const menuItems =
     data.wpMenu?.menuItems?.nodes
       .filter((item): item is { label: string; path: string } => !!item.label)
@@ -64,35 +69,56 @@ export default function Header(): JSX.Element {
         label: item.label!,
         path: item.path ?? undefined,
       })) ?? [];
+
   const siteLogoData = data.wp?.siteLogo?.localFile?.childImageSharp
     ? getImage(data.wp.siteLogo.localFile as ImageDataLike)
     : null;
   const siteLogoAltText = data.wp?.siteLogo?.altText || "Site logo";
 
   return (
-    <header
-      data-jarallax
-      data-speed="0.5"
-      className={clsx(headerHomeStyle, "header jarallax")}
-      role="banner"
-      style={{ backgroundImage: `url(${headerImage})` }}
-    >
+    <header data-jarallax data-speed="0.5" className={clsx(headerHomeStyle, "header jarallax")} role="banner">
+      {headerImageData && (
+        <GatsbyImage
+          image={headerImageData}
+          loading="eager"
+          fetchPriority="high"
+          alt="Background"
+          className="jarallax-img"
+          style={{ height: "100%", width: "100%" }}
+          objectFit="cover"
+          objectPosition="center"
+        />
+      )}
+
       <a className={clsx("content", logoWrapperStyle)} href="/">
         <img className={logoStyle} src={logo} alt="logo"></img>
       </a>
+
       <Box
         as="div"
         ref={menuRef}
-        className={clsx(menuWrapperStyle, { [stickedMenuWrapperStyle]: isMenuAtInitialPosition })}
+        className={clsx(menuWrapperStyle, {
+          [stickedMenuWrapperStyle]: isMenuAtInitialPosition,
+        })}
       >
         <Box className={clsx(headerHomeContentStyle, "content")}>
-          <Link to="/" className={clsx(menuLogoStyle, { [stickedMenuLogoStyle]: isMenuAtInitialPosition })}>
-            {siteLogoData ? <GatsbyImage image={siteLogoData} alt={siteLogoAltText} /> : <p>Logo non disponible</p>}
+          <Link
+            to="/"
+            className={clsx(menuLogoStyle, {
+              [stickedMenuLogoStyle]: isMenuAtInitialPosition,
+            })}
+          >
+            {siteLogoData ? (
+              <GatsbyImage image={siteLogoData} alt={siteLogoAltText} loading="eager" fetchPriority="high" />
+            ) : (
+              <p>Logo non disponible</p>
+            )}
           </Link>
+
           <ResponsiveMenu
             menuItems={menuItems}
             theme={isMenuAtInitialPosition ? "whiteBackgroundMenu" : "transparentBackgroundMenu"}
-          ></ResponsiveMenu>
+          />
         </Box>
       </Box>
     </header>

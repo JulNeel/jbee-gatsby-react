@@ -20,6 +20,8 @@ const PageTemplate: React.FC<PageProps<Queries.PageByIdQuery>> = ({ data: { curr
             <GatsbyImage
               image={imageData}
               alt={currentPage?.featuredImage?.node?.altText ?? currentPage?.title ?? ""}
+              loading="eager"
+              fetchPriority="high"
             />
           )}
         </header>

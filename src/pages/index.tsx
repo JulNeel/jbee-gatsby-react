@@ -10,17 +10,29 @@ import Footer from "../components/Footer";
 import { useSeoMetadata } from "../hooks/useSeoMetadata";
 
 const App: React.FC<PageProps> = () => {
+  const [isClient, setIsClient] = React.useState(false);
+
   React.useEffect(() => {
-    if (typeof window !== "undefined") {
-      import("jarallax").then(({ jarallax }) => {
-        jarallax(document.querySelectorAll(".jarallax"), {});
-      });
-    }
+    setIsClient(true);
   }, []);
+
+  React.useEffect(() => {
+    if (!isClient) return;
+
+    import("jarallax")
+      .then(({ jarallax }) => {
+        const elements = document.querySelectorAll(".jarallax");
+        if (elements.length) {
+          jarallax(elements, {});
+        }
+      })
+      .catch((err) => console.error("Erreur lors du chargement de Jarallax :", err));
+  }, [isClient]);
+
   return (
     <div className={clsx(lightTheme, "home")}>
-      <HeaderHome></HeaderHome>
-      <Box role="main" as={"div"} className={"content"} height={"100vh"} py="32">
+      <HeaderHome />
+      <Box role="main" as="div" className="content" height="100vh" py="32">
         <PostsList />
       </Box>
       <Footer />
@@ -58,11 +70,6 @@ export const Head: React.FC = () => {
             "https://github.com/JulNeel",
           ],
         },
-        // potentialAction: {
-        //   "@type": "SearchAction",
-        //   target: `${siteUrl}/?s={search_term_string}`,
-        //   "query-input": "required name=search_term_string",
-        // },
       },
       {
         "@type": "CollectionPage",
