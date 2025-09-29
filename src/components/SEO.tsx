@@ -19,7 +19,7 @@ export const SEO: React.FC<SeoProps> = (seo) => {
     title: seo.title,
     description: seo.description,
     image: seo.image,
-    url: siteUrl,
+    url: seo.url ? `${siteUrl}${seo.url}` : siteUrl,
     canonical: seo.canonical ?? siteUrl,
     twitterUsername: twitterUsername,
     noindex: seo.noindex,

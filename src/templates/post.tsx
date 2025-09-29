@@ -6,6 +6,8 @@ import Layout from "../components/Layout";
 import { Box } from "../components/Box";
 import { blogPostNavItemStyle, blogPostNavStyle } from "./post.css";
 import Giscus from "../components/Giscus";
+import { useSeoMetadata } from "../hooks/useSeoMetadata";
+import { sanitizeYoastHead } from "../utils/sanitizeYoastHead";
 
 const PostTemplate: React.FC<PageProps<Queries.PostByIdQuery>> = ({
   data: { previousPost, nextPost, currentPost },
@@ -106,13 +108,13 @@ export const postQuery = graphql`
 
 export const Head: React.FC<HeadProps<Queries.PostByIdQuery>> = ({ data }) => {
   if (!data.currentPost?.seo?.fullHead) return null;
-
+  const { siteUrl } = useSeoMetadata();
   return (
     <>
       <html lang="fr" />
       <div
         dangerouslySetInnerHTML={{
-          __html: data.currentPost.seo.fullHead,
+          __html: sanitizeYoastHead(data.currentPost.seo.fullHead, siteUrl),
         }}
       />
     </>

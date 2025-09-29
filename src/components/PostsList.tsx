@@ -1,8 +1,6 @@
 import { graphql, useStaticQuery } from "gatsby";
 import React from "react";
 import { Box } from "./Box";
-import { GatsbyImage } from "gatsby-plugin-image";
-import parse from "html-react-parser";
 import { postsListStyle } from "./PostsList.css";
 import PostsListItem from "./PostsListItem";
 
@@ -16,7 +14,7 @@ const PostsList: React.FC = () => {
           id
           featuredImage {
             node {
-              gatsbyImage(width: 400)
+              gatsbyImage(width: 500)
               altText
             }
           }
