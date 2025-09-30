@@ -68,7 +68,7 @@ globalStyle('a:hover', {
   color: themeVars.textColors.linkHover,
 })
 
-globalStyle('code', {
+globalStyle('code,code[class*="language-"]', {
   wordBreak: 'break-all',
 })
 
