@@ -1,7 +1,6 @@
 import React from "react";
 import { Box } from "./Box";
 import { GatsbyImage } from "gatsby-plugin-image";
-import parse from "html-react-parser";
 import { PostExcerptStyle, thumbnailStyle, thumbnailWrapperStyle } from "./PostsListItem.css";
 
 type Post = NonNullable<Queries.PostsListQuery["allWpPost"]["posts"][number]>;
@@ -29,9 +28,13 @@ const PostsListItem: React.FC<Post> = (post) => {
         {post.title}
       </Box>
       {post.excerpt && (
-        <Box as="div" className={PostExcerptStyle} fontSize={"small"} textDecorationLine="none">
-          {parse(post.excerpt)}
-        </Box>
+        <Box
+          as="div"
+          className={PostExcerptStyle}
+          fontSize={"small"}
+          textDecorationLine="none"
+          dangerouslySetInnerHTML={{ __html: post.excerpt }}
+        />
       )}
     </Box>
   );

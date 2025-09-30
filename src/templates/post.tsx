@@ -1,7 +1,6 @@
 import React from "react";
 import { Link, PageProps, HeadProps, graphql } from "gatsby";
 import { GatsbyImage, getImage, ImageDataLike } from "gatsby-plugin-image";
-import parse from "html-react-parser";
 import Layout from "../components/Layout";
 import { Box } from "../components/Box";
 import { blogPostNavItemStyle, blogPostNavStyle } from "./post.css";
@@ -15,12 +14,18 @@ const PostTemplate: React.FC<PageProps<Queries.PostByIdQuery>> = ({
   const imageData = currentPost?.featuredImage?.node?.localFile
     ? getImage(currentPost.featuredImage.node.localFile as ImageDataLike)
     : undefined;
-
+  const options = {
+    replace: (domNode: any) => {
+      if (domNode.name === "script" || domNode.name === "html" || domNode.name === "head" || domNode.name === "body") {
+        return null;
+      }
+    },
+  };
   return (
     <Layout isHomePage={false}>
       <article itemScope itemType="http://schema.org/BlogPosting">
         <header>
-          <h1 itemProp="headline">{parse(currentPost?.title ?? "")}</h1>
+          <h1 itemProp="headline">{currentPost?.title ?? ""}</h1>
           <Box as="div" className="blog-post-meta" display="flex" justifyContent="space-between" mb={"8"} padding={"8"}>
             <Box as="span" ml="auto">
               {currentPost?.date}
@@ -35,7 +40,9 @@ const PostTemplate: React.FC<PageProps<Queries.PostByIdQuery>> = ({
             />
           )}
         </header>
-        {!!currentPostHtml?.html && <section itemProp="articleBody">{parse(currentPostHtml.html)}</section>}
+        {!!currentPostHtml?.html && (
+          <section itemProp="articleBody" dangerouslySetInnerHTML={{ __html: currentPostHtml.html }}></section>
+        )}
 
         <Box as={"h2"}>Commentaires</Box>
         <Giscus />
@@ -47,14 +54,14 @@ const PostTemplate: React.FC<PageProps<Queries.PostByIdQuery>> = ({
           <Box as={"li"} marginRight={"auto"} className={blogPostNavItemStyle}>
             {previousPost && (
               <Link to={previousPost.uri ?? ""} rel="prev">
-                ← {parse(previousPost.title ?? "")}
+                ← {previousPost.title ?? ""}
               </Link>
             )}
           </Box>
           <Box marginLeft={"auto"} as={"li"} className={blogPostNavItemStyle}>
             {nextPost && (
               <Link to={nextPost.uri ?? ""} rel="next">
-                {parse(nextPost.title ?? "")} →
+                {nextPost.title ?? ""} →
               </Link>
             )}
           </Box>
@@ -109,7 +116,7 @@ export const postQuery = graphql`
 
 export const Head: React.FC<HeadProps<Queries.PostByIdQuery>> = ({ data }) => {
   if (!data.currentPost?.seo?.fullHead) return null;
-  const { siteUrl } = useSeoMetadata();
+  const { siteUrl, siteFaviconUrl } = useSeoMetadata();
   return (
     <>
       <html lang="fr" />
@@ -118,6 +125,14 @@ export const Head: React.FC<HeadProps<Queries.PostByIdQuery>> = ({ data }) => {
           __html: sanitizeYoastHead(data.currentPost.seo.fullHead, siteUrl),
         }}
       />
+      {siteFaviconUrl && (
+        <>
+          <link rel="icon" href={siteFaviconUrl} sizes="32x32" />
+          <link rel="icon" href={siteFaviconUrl} sizes="192x192" />
+          <link rel="apple-touch-icon" href={siteFaviconUrl} />
+          <meta name="msapplication-TileImage" content={siteFaviconUrl} />
+        </>
+      )}
     </>
   );
 };

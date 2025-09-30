@@ -1,7 +1,6 @@
 import React from "react";
-import { PageProps, HeadProps, graphql } from "gatsby";
+import { PageProps, graphql } from "gatsby";
 import { GatsbyImage, getImage, ImageDataLike } from "gatsby-plugin-image";
-import parse from "html-react-parser";
 import Layout from "../components/Layout";
 import { useSeoMetadata } from "../hooks/useSeoMetadata";
 import { SEO } from "../components/SEO";
@@ -15,7 +14,7 @@ const PageTemplate: React.FC<PageProps<Queries.PageByIdQuery>> = ({ data: { curr
     <Layout isHomePage={false}>
       <article itemScope itemType="http://schema.org/WebPage">
         <header>
-          <h1 itemProp="headline">{parse(currentPage?.title ?? "")}</h1>
+          <h1 itemProp="headline" dangerouslySetInnerHTML={{ __html: currentPage?.title ?? "" }} />
           {imageData && (
             <GatsbyImage
               image={imageData}
@@ -26,7 +25,9 @@ const PageTemplate: React.FC<PageProps<Queries.PageByIdQuery>> = ({ data: { curr
           )}
         </header>
 
-        {!!currentPage?.content && <section itemProp="articleBody">{parse(currentPage.content)}</section>}
+        {!!currentPage?.content && (
+          <section itemProp="articleBody" dangerouslySetInnerHTML={{ __html: currentPage.content }} />
+        )}
       </article>
     </Layout>
   );
