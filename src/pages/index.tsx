@@ -7,6 +7,7 @@ import clsx from "clsx";
 import { SEO } from "../components/SEO";
 import Footer from "../components/Footer";
 import { useSeoMetadata } from "../hooks/useSeoMetadata";
+import Header from "../components/Header";
 
 const App: React.FC<PageProps> = () => {
   const [isClient, setIsClient] = React.useState(false);
@@ -30,7 +31,7 @@ const App: React.FC<PageProps> = () => {
 
   return (
     <div className="home">
-      <HeaderHome />
+      <Header isHomePage />
       <Box role="main" as="div" className="content" height="100vh" py="32">
         <PostsList />
       </Box>

@@ -54,4 +54,90 @@ export const scrolledLogoStyle = style({
 })
 
 
+export const headerHomeStyle = style({
+  width: "100%",
+  minHeight: "300px",
+  backgroundColor: "gray",
+  display: "flex",
+  flexDirection: "column",
+  alignItems: 'center',
+  justifyContent: 'center',
+  zIndex: 10,
+  '@media': {
+    [breakpoints.tablet]: {
+      minHeight: "500px",
+    },
+  }
+});
+
+export const headerHomeContentStyle = style({
+  display: "flex",
+  justifyContent: 'center',
+  paddingBlock: themeVars.spaces[16],
+  '@media': {
+    [breakpoints.tablet]: {
+      display: "flex",
+      justifyContent: 'space-between',
+      alignItems: 'end',
+    },
+  }
+})
+
+export const logoWrapperStyle = style({
+  display: "flex",
+  alignItems: 'center',
+  justifyContent: 'center',
+  flexGrow: 1
+})
+
+export const HomeLogoStyle = style({
+  maxWidth: "95vw",
+  width: "500px",
+  height: "auto",
+});
+
+export const menuWrapperStyle = style({
+  width: "100%",
+  boxShadow: "none",
+  transition: "all .5s ease-out",
+  background: "none",
+})
+export const stickedMenuWrapperStyle = style({
+  "@media": {
+    [breakpoints.smallDesktop]: {
+      position: "fixed",
+      top: 0,
+      background: themeVars.backgroundColor.site,
+      boxShadow: "0 1px 5px grey",
+      transition: "all .5s ease-out"
+    }
+  }
+})
+
+
+export const menuLogoStyle = style({
+  display: "none",
+  '@media': {
+    [breakpoints.smallDesktop]: {
+      maxWidth: 100,
+      transition: "max-width 0.5s",
+    },
+  }
+})
+
+export const stickedMenuLogoStyle = style({
+
+  '@media': {
+    [breakpoints.smallDesktop]: {
+      display: "block",
+      maxWidth: 100,
+      transition: "max-width 0.5s",
+    },
+  }
+})
+
+
+
+
+
 

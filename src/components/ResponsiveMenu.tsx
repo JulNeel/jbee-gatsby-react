@@ -19,6 +19,7 @@ import {
 type MenuItem = {
   label: string;
   path: string;
+  expernalLink?: boolean;
 };
 
 export type ResponsiveMenuProps = {
@@ -68,9 +69,15 @@ const ResponsiveMenu: React.FC<ResponsiveMenuProps> = ({ menuItems, theme }) => 
               fontSize={["xxLarge", "xxLarge", "large", "xLarge"]}
               key={menuItem.label}
             >
-              <Link className={menuLinkStyle} to={menuItem.path ?? "#"}>
-                {menuItem.label}
-              </Link>
+              {menuItem.expernalLink ? (
+                <a className={menuLinkStyle} href={menuItem.path} target="_blank" rel="noopener noreferrer">
+                  {menuItem.label}
+                </a>
+              ) : (
+                <Link className={menuLinkStyle} to={menuItem.path ?? "#"}>
+                  {menuItem.label}
+                </Link>
+              )}
             </Box>
           ))}
         </Box>
