@@ -54,7 +54,7 @@ export const scrolledLogoStyle = style({
 })
 
 
-export const headerHomeStyle = style({
+export const HomeHeaderStyle = style({
   width: "100%",
   minHeight: "300px",
   backgroundColor: "gray",
@@ -70,7 +70,7 @@ export const headerHomeStyle = style({
   }
 });
 
-export const headerHomeContentStyle = style({
+export const HomeHeaderContentStyle = style({
   display: "flex",
   justifyContent: 'center',
   paddingBlock: themeVars.spaces[16],

@@ -104,12 +104,13 @@ export const hamburgerButton = style({
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
-  backgroundColor: themeVars.buttonColors.secondary.background,
+  backgroundColor: themeVars.buttonColors.primary.background,
+  color: themeVars.buttonColors.primary.text,
   left: 0,
   boxShadow: "0 -1px 5px grey",
   ':hover': {
-    backgroundColor: themeVars.buttonColors.secondary.hoverBackground,
-    color: themeVars.buttonColors.secondary.hoverText
+    backgroundColor: themeVars.buttonColors.primary.hoverBackground,
+    color: themeVars.buttonColors.primary.hoverText
   },
   '@media': {
     [breakpoints.smallDesktop]: {
@@ -130,7 +131,7 @@ export const hamburgerButton = style({
 })
 
 const hamburgerLineRules: CSSProperties = {
-  backgroundColor: themeVars.buttonColors.secondary.text,
+  backgroundColor: themeVars.buttonColors.primary.text,
   content: '',
   display: "block",
   height: "100%",
@@ -140,7 +141,7 @@ const hamburgerLineRules: CSSProperties = {
 
 }
 export const hamburgerLine = style({
-  background: themeVars.buttonColors.secondary.text,
+  background: themeVars.buttonColors.primary.text,
   display: "block",
   height: 2,
   position: 'relative',

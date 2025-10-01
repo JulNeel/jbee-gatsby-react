@@ -1,6 +1,5 @@
 import { PageProps } from "gatsby";
 import * as React from "react";
-import HeaderHome from "../components/HeaderHome";
 import PostsList from "../components/PostsList";
 import { Box } from "../components/Box";
 import clsx from "clsx";
