@@ -4,12 +4,14 @@ import { themeVars } from "./themes/themeContract.css";
 import { breakpoints } from "./breakpoints";
 
 
+globalStyle('html, body', {
+  backgroundColor: themeVars.backgroundColor,
+})
 globalStyle('.home, .layout', {
   fontFamily: themeVars.typography.fontFamily.body,
   color: themeVars.textColors.default,
   backgroundColor: themeVars.backgroundColor,
   fontSize: themeVars.typography.fontSize.medium
-
 })
 globalStyle('h1, h2, h3, h4, h5, h6', {
   fontFamily: themeVars.typography.fontFamily.heading,

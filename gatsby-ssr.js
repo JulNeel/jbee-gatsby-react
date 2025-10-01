@@ -1,6 +1,8 @@
 import React from "react";
+import { lightTheme } from "./src/styles/themes/lightTheme.css";
 
-export const onRenderBody = ({ setHeadComponents }) => {
+export const onRenderBody = ({ setHeadComponents, setHtmlAttributes }) => {
+  setHtmlAttributes({ className: lightTheme });
   setHeadComponents([
     // Préload Roboto
     <link
