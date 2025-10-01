@@ -63,11 +63,11 @@ globalStyle('.wp-element-caption', {
 })
 globalStyle('a', {
   color: themeVars.textColors.link,
-  textDecoration: "none",
+  textDecoration: "underline",
 
 })
 
-globalStyle('a:hover', {
+globalStyle('p a:hover', {
   color: themeVars.textColors.linkHover,
   backgroundColor: themeVars.backgroundColor.linkHover,
 })
