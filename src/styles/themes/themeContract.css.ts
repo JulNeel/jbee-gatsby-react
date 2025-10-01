@@ -2,7 +2,10 @@ import { createThemeContract } from '@vanilla-extract/css';
 
 export const themeVars = createThemeContract({
 
-  backgroundColor: null,
+  backgroundColor: {
+    site: null,
+    linkHover: null
+  },
   textColors: {
     default: null,
     heading: null,

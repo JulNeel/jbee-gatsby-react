@@ -137,8 +137,6 @@ globalStyle("body", {
   paddingLeft: 0,
 });
 
-globalStyle("a:where(:not(.wp-element-button))", {
-  textDecoration: "underline",
-});
+
 
 

@@ -4,7 +4,7 @@ import { globalVars } from "../styles/themes/globalTheme.css";
 import { themeVars } from "../styles/themes/themeContract.css";
 
 export const [whiteBackgroundMenu, localThemeVars] = createTheme({
-  background: themeVars.backgroundColor,
+  background: themeVars.backgroundColor.site,
   text: themeVars.textColors.default,
   hoverBackground: globalVars.wpColors.primary,
   hoverText: themeVars.textColors.white,
@@ -14,7 +14,6 @@ export const transparentBackgroundMenu = createTheme(localThemeVars, {
   text: themeVars.textColors.white,
   hoverBackground: themeVars.textColors.white,
   hoverText: themeVars.textColors.default,
-
 })
 
 export const navMenuStyle = style({
@@ -49,7 +48,7 @@ export const navMenuStyle = style({
 export const navMenuOpened = style({
   transition: 'max-height .5s ease-out, background 0s 0s ease-out',
   maxHeight: '100%',
-  background: themeVars.backgroundColor,
+  background: themeVars.backgroundColor.site,
 
 })
 export const menuItemStyle = style({

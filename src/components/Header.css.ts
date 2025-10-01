@@ -8,7 +8,7 @@ export const headerStyle = style({
   top: 0,
   zIndex: 99,
   width: "100%",
-  backgroundColor: themeVars.backgroundColor,
+  backgroundColor: themeVars.backgroundColor.site,
   boxShadow: "0 1px 5px grey",
 })
 
