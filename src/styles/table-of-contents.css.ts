@@ -14,3 +14,7 @@ globalStyle('.table-of-contents li', {
 globalStyle('.table-of-contents a', {
   textDecoration: "none"
 })
+
+globalStyle('.table-of-contents a:hover', {
+  textDecoration: "underline"
+})
