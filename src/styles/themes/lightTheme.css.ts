@@ -5,7 +5,7 @@ import { themeVars } from './themeContract.css'
 export const lightTheme = createTheme(themeVars, {
   backgroundColor: {
     site: globalVars.wpColors.offwhite,
-    linkHover: globalVars.wpColors.primary
+    linkHover: globalVars.wpColors.primarydark
   },
   textColors: {
     default: globalVars.wpColors.primarydark,
