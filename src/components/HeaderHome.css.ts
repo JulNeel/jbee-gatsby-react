@@ -50,7 +50,7 @@ export const stickedMenuWrapperStyle = style({
     [breakpoints.smallDesktop]: {
       position: "fixed",
       top: 0,
-      background: themeVars.backgroundColor,
+      background: themeVars.backgroundColor.site,
       boxShadow: "0 1px 5px grey",
       transition: "all .5s ease-out"
     }

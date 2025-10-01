@@ -5,12 +5,12 @@ import { breakpoints } from "./breakpoints";
 
 
 globalStyle('html, body', {
-  backgroundColor: themeVars.backgroundColor,
+  backgroundColor: themeVars.backgroundColor.site,
 })
 globalStyle('.home, .layout', {
   fontFamily: themeVars.typography.fontFamily.body,
   color: themeVars.textColors.default,
-  backgroundColor: themeVars.backgroundColor,
+  backgroundColor: themeVars.backgroundColor.site,
   fontSize: themeVars.typography.fontSize.medium
 })
 globalStyle('h1, h2, h3, h4, h5, h6', {
@@ -63,11 +63,13 @@ globalStyle('.wp-element-caption', {
 })
 globalStyle('a', {
   color: themeVars.textColors.link,
-  textDecoration: "underline",
+  textDecoration: "none",
+
 })
 
 globalStyle('a:hover', {
   color: themeVars.textColors.linkHover,
+  backgroundColor: themeVars.backgroundColor.linkHover,
 })
 
 globalStyle('code,code[class*="language-"]', {

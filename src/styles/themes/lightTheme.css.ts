@@ -3,12 +3,15 @@ import { globalVars } from './globalTheme.css';
 import { themeVars } from './themeContract.css'
 
 export const lightTheme = createTheme(themeVars, {
-  backgroundColor: globalVars.wpColors.offwhite,
+  backgroundColor: {
+    site: globalVars.wpColors.offwhite,
+    linkHover: globalVars.wpColors.primary
+  },
   textColors: {
     default: globalVars.wpColors.primarydark,
     heading: globalVars.wpColors.primarydark,
     link: globalVars.wpColors.primary,
-    linkHover: globalVars.wpColors.primarylight,
+    linkHover: globalVars.wpColors.purewhite,
     secondary: globalVars.wpColors.secondarydark,
     success: globalVars.wpColors.success,
     danger: globalVars.wpColors.danger,
