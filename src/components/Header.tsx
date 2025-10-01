@@ -9,8 +9,8 @@ import {
   logoStyle,
   scrolledHeaderStyle,
   scrolledLogoStyle,
-  headerHomeContentStyle,
-  headerHomeStyle,
+  HomeHeaderContentStyle,
+  HomeHeaderStyle,
   logoWrapperStyle,
   menuLogoStyle,
   menuWrapperStyle,
@@ -92,7 +92,7 @@ const Header: React.FC<HeaderProps> = ({ isHomePage = false }) => {
   ];
 
   return isHomePage ? (
-    <header data-jarallax data-speed="0.5" className={clsx(headerHomeStyle, "header jarallax")} role="banner">
+    <header data-jarallax data-speed="0.5" className={clsx(HomeHeaderStyle, "header jarallax")} role="banner">
       {headerImageData && (
         <GatsbyImage
           image={headerImageData}
@@ -116,7 +116,7 @@ const Header: React.FC<HeaderProps> = ({ isHomePage = false }) => {
           [stickedMenuWrapperStyle]: isMenuAtInitialPosition,
         })}
       >
-        <Box className={clsx(headerHomeContentStyle, "content")}>
+        <Box className={clsx(HomeHeaderContentStyle, "content")}>
           <Link
             to="/"
             className={clsx(menuLogoStyle, {
