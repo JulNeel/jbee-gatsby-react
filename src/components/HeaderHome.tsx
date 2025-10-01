@@ -81,16 +81,16 @@ export default function Header(): JSX.Element {
           image={headerImageData}
           loading="eager"
           fetchPriority="high"
-          alt="Background"
+          alt=""
           className="jarallax-img"
           objectFit="cover"
           objectPosition="center"
         />
       )}
 
-      <a className={clsx("content", logoWrapperStyle)} href="/">
-        <img className={logoStyle} src={logo} alt="logo"></img>
-      </a>
+      <Box className={clsx("content", logoWrapperStyle)}>
+        <img className={logoStyle} src={logo} alt="Julien Bruneel, développeur web"></img>
+      </Box>
 
       <Box
         as="div"

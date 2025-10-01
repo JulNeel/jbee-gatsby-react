@@ -38,7 +38,7 @@ const Layout: React.FC<LayoutProps> = ({ isHomePage, children }) => {
     ? getImage(data.wp.siteLogo.localFile as ImageDataLike)
     : null;
 
-  const siteLogoAltText = data.wp?.siteLogo?.altText || "Site logo";
+  const siteLogoAltText = "accueil de Julien Bruneel, développeur web";
 
   return (
     <div className={clsx(layoutStyle, "layout")} id={`layout`} data-is-root-path={isHomePage}>

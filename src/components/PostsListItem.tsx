@@ -21,7 +21,7 @@ const PostsListItem: React.FC<Post> = (post) => {
     >
       <Box as="div" className={thumbnailWrapperStyle}>
         {gatsbyImage && (
-          <GatsbyImage image={gatsbyImage} className={thumbnailStyle} alt={altText ?? post.title ?? ""} />
+          <GatsbyImage image={gatsbyImage} className={thumbnailStyle} alt="" fetchPriority="high" loading="eager" />
         )}
       </Box>
       <Box as="h3" textDecorationLine="none" color="default" fontSize="medium" my="4">
