@@ -2,7 +2,6 @@ import { graphql, useStaticQuery } from "gatsby";
 import { getImage, ImageDataLike } from "gatsby-plugin-image";
 import React, { ReactNode } from "react";
 import Header from "./Header";
-import { lightTheme } from "../styles/themes/lightTheme.css";
 import clsx from "clsx";
 import { Box } from "./Box";
 import { layoutStyle, mainStyle } from "./layout.css";
@@ -39,10 +38,10 @@ const Layout: React.FC<LayoutProps> = ({ isHomePage, children }) => {
     ? getImage(data.wp.siteLogo.localFile as ImageDataLike)
     : null;
 
-  const siteLogoAltText = data.wp?.siteLogo?.altText || "Site logo";
+  const siteLogoAltText = "accueil de Julien Bruneel, développeur web";
 
   return (
-    <div className={clsx(lightTheme, layoutStyle, "layout")} id={`layout`} data-is-root-path={isHomePage}>
+    <div className={clsx(layoutStyle, "layout")} id={`layout`} data-is-root-path={isHomePage}>
       <Header siteLogoData={siteLogoData} siteLogoAltText={siteLogoAltText}></Header>
 
       <Box as={"main"} role="main" mb={"64"} className={clsx("content", mainStyle)}>

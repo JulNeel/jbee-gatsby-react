@@ -3,7 +3,6 @@ import * as React from "react";
 import HeaderHome from "../components/HeaderHome";
 import PostsList from "../components/PostsList";
 import { Box } from "../components/Box";
-import { lightTheme } from "../styles/themes/lightTheme.css";
 import clsx from "clsx";
 import { SEO } from "../components/SEO";
 import Footer from "../components/Footer";
@@ -30,7 +29,7 @@ const App: React.FC<PageProps> = () => {
   }, [isClient]);
 
   return (
-    <div className={clsx(lightTheme, "home")}>
+    <div className="home">
       <HeaderHome />
       <Box role="main" as="div" className="content" height="100vh" py="32">
         <PostsList />
