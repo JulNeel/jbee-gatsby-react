@@ -47,7 +47,7 @@ const Header: React.FC<HeaderProps> = ({ isHomePage = false }) => {
           sourceUrl
           localFile {
             childImageSharp {
-              gatsbyImageData(placeholder: DOMINANT_COLOR)
+              gatsbyImageData(placeholder: BLURRED)
             }
           }
         }
