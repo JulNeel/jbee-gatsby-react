@@ -19,7 +19,7 @@ import {
 type MenuItem = {
   label: string;
   path: string;
-  expernalLink?: boolean;
+  isExternalLink?: boolean;
 };
 
 export type ResponsiveMenuProps = {
@@ -47,6 +47,7 @@ const ResponsiveMenu: React.FC<ResponsiveMenuProps> = ({ menuItems, theme }) => 
         aria-expanded={isMenuOpened}
         aria-label="Menu"
         aria-controls="main-menu"
+        role="button"
       >
         <span className={clsx(hamburgerLine, { [hamburgerLineOpened]: isMenuOpened })}></span>
       </Box>
@@ -67,9 +68,9 @@ const ResponsiveMenu: React.FC<ResponsiveMenuProps> = ({ menuItems, theme }) => 
               className={menuItemStyle}
               fontFamily="oswald"
               fontSize={["xxLarge", "xxLarge", "large", "xLarge"]}
-              key={menuItem.label}
+              key={menuItem.path}
             >
-              {menuItem.expernalLink ? (
+              {menuItem.isExternalLink ? (
                 <a className={menuLinkStyle} href={menuItem.path} target="_blank" rel="noopener noreferrer">
                   {menuItem.label}
                 </a>

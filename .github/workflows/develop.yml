@@ -15,7 +15,7 @@ jobs:
           ref: "develop"
 
       - name: Use Node.js 22
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
           node-version: "22"
 
@@ -23,9 +23,7 @@ jobs:
         run: npm install -f
 
       - name: 🔨 Build Project
-        run: |
-          npm install -g gatsby-cli
-          gatsby build
+        run: npm run build
 
       - name: 📂 Sync files
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5

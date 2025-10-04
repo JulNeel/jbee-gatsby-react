@@ -87,7 +87,7 @@ const Header: React.FC<HeaderProps> = ({ isHomePage = false }) => {
         path: item.path ?? undefined,
       })) ?? []),
     ...(data.wpUser?.seo?.social?.linkedIn
-      ? [{ label: "LinkedIn", path: data.wpUser.seo.social.linkedIn, expernalLink: true }]
+      ? [{ label: "LinkedIn", path: data.wpUser.seo.social.linkedIn, isExternalLink: true }]
       : []),
   ];
 
